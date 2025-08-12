@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -22,7 +24,7 @@
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
-  --color-input: var(--input);  
+  --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
@@ -46,6 +48,8 @@
   --font-heading: var(--font-inter);
   --font-plex: var(--font-ibm-plex-mono);
   --font-playfair: var(--font-playfair-display);
+  --font-geist: 'Geist', sans-serif;
+  --font-inter: 'Inter', sans-serif;
 }
 
 :root {
@@ -121,11 +125,25 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
+body {
+  overflow-x: hidden;
+}
+
+/* 
+body {
+  overflow: hidden;
+}
+
+main {
+  overflow: scroll;
+  scrollbar-width: none;
+} */
 
 ::-moz-selection {
   color: var(--background);
@@ -155,7 +173,7 @@
   animation-duration: 0.7s;
   animation-timing-function: var(--expo-out);
 }
-      
+
 ::view-transition-new(root) {
   animation-name: reveal-light;
 }
@@ -165,6 +183,7 @@
   animation: none;
   z-index: -1;
 }
+
 .dark::view-transition-new(root) {
   animation-name: reveal-dark;
 }
@@ -173,6 +192,7 @@
   from {
     clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%);
   }
+
   to {
     clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%);
   }
@@ -182,8 +202,8 @@
   from {
     clip-path: polygon(171% 50%, 50% 171%, 50% 171%, 171% 50%);
   }
+
   to {
     clip-path: polygon(171% 50%, 50% 171%, -50% 71%, 50% -71%);
   }
 }
-

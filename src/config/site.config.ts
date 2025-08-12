@@ -1,8 +1,8 @@
 import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-  name: "Immersive Tamatar",
-  title: "Immersive Tamatar - Next.js 15 starter boilerplate with R3F",
+  name: "Phoenix",
+  title: "Phoenix",
   description: "",
   origin: "https://immersivetamatar.vercel.app",
   keywords: [

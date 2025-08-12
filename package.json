@@ -10,9 +10,10 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.0",
-    "@react-three/drei": "^10.0.8",
+    "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.1.2",
     "@types/react-howler": "^5.2.3",
+    "@types/three": "^0.179.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gsap": "^3.13.0",

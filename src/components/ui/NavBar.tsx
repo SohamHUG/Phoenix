@@ -107,7 +107,7 @@ export default function Navbar() {
                         }}
                     >
                         <div
-                            ref={el => progressRefs.current[i] = el}
+                            ref={(el) => { (progressRefs.current as (HTMLDivElement | null)[])[i] = el }}
                             className="absolute inset-0 bg-[#FF5304] z-0 rounded-[inherit]"
                             style={{ width: i <= activeSection ? '100%' : '0%' }}
                         />

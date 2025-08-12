@@ -5,9 +5,16 @@ import * as THREE from "three"
 
 export default function Phx({ rotation = [Math.PI / 2, 0, 0], ...props }) {
     const ref = useRef<THREE.Mesh>(null)
-    const { nodes } = useGLTF("/phx_project.glb")
+    // const { nodes } = useGLTF("/phx_project.glb")
 
     const [mouse, setMouse] = useState({ x: 0, y: 0 })
+
+
+    const { nodes } = useGLTF("/phx_project.glb") as unknown as {
+        nodes: {
+            Curve002: THREE.Mesh
+        }
+    }
 
     useEffect(() => {
         const handleMouseMove = (event: MouseEvent) => {

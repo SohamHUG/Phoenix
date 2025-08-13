@@ -9,6 +9,7 @@ import Navbar from "@/components/ui/NavBar";
 import Hero from "@/components/Sections/Hero";
 import { div } from "three/tsl";
 import BackgroundVid from "@/components/ui/BackgroundVid";
+import About from "@/components/Sections/About";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -125,12 +126,14 @@ export default function Home() {
           <Hero />
         </section>
 
-        <section id="about" className="panel border-t-2 h-screen flex items-center justify-center bg-white">
-          <h1>ABOUT</h1>
+        <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF]">
+          <About />
         </section>
+
         <section id="merch" className="panel border-t-2 h-screen flex items-center justify-center bg-white">
           <h1>MERCH</h1>
         </section>
+        
         <section id="newsletter" className="panel border-t-2 h-screen flex items-center justify-center bg-white">
           <h1>NEWSLETTER</h1>
         </section>

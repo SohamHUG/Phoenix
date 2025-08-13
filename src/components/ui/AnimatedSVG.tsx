@@ -8,7 +8,7 @@ import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
 
 interface AnimatedSVGProps {
-    svg: string;
+    svg: string; 
     duration?: number;
 }
 
@@ -45,13 +45,13 @@ export default function AnimatedSVG({ svg, duration = 3 }: AnimatedSVGProps) {
             const parent = path.parentNode;
             const attributes = Array.from(path.attributes);
 
-            rawPath.forEach(segment => {
+            rawPath.forEach((segment: any) => {
                 const newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
                 attributes.forEach(attr => newPath.setAttribute(attr.name, attr.value));
 
                 newPath.setAttribute(
                     "d",
-                    "M" + segment[0] + "," + segment[1] + "C" + segment.slice(2).join(",") + (segment ? "z" : "")
+                    "M" + segment[0] + "," + segment[1] + "C" + segment.slice(2).join(",") + (segment.closed ? "z" : "") // La propriété closed n'existe pas sur le type number[]
                 );
 
                 parent?.insertBefore(newPath, path);
@@ -64,5 +64,5 @@ export default function AnimatedSVG({ svg, duration = 3 }: AnimatedSVGProps) {
         return newPaths;
     }
 
-    return <div className="flex items-center justify-center w-[1009px] h-[540px]" ref={containerRef}></div>;
+    return <div className="w-full h-full flex items-center justify-center" ref={containerRef}></div>;
 }

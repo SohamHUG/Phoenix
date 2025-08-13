@@ -54,7 +54,7 @@ export default function Home() {
       delay: 0.5,
     });
 
-    const lenis = new Lenis({ duration: 0.6, smoothWheel: true, easing: (t) => t });
+    const lenis = new Lenis({ duration: 1, smoothWheel: false, easing: (t) => t });
     lenisRef.current = lenis;
 
     const raf = (time: number) => {
@@ -127,7 +127,7 @@ export default function Home() {
         </section>
 
         <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF]">
-          <About />
+          <About active={activeSection === 1} />
         </section>
 
         <section id="merch" className="panel border-t-2 h-screen flex items-center justify-center bg-white">

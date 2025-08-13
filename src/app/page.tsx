@@ -1,30 +1,47 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import { AnimatedText } from "@/components/ui/text-animation";
-import ReactHowler from "react-howler";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollDrivenBoxes } from "@/components/three/ScrollDrivenBoxes";
-import { Environment, EnvironmentMap } from "@react-three/drei";
-import Phx from "@/components/three/Phx";
-import PhxParticles from "@/components/three/PhxParticles";
+import Lenis from "lenis";
 import CustomLoader from "@/components/ui/CustomLoader";
 import Navbar from "@/components/ui/NavBar";
-import Lenis from "lenis";
 import Hero from "@/components/Sections/Hero";
+import { div } from "three/tsl";
+import BackgroundVid from "@/components/ui/BackgroundVid";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const sections = ["home", "about", "merch", "newsletter"];
+
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
+  const stackRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
-  
+  const loaderRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
+  const [activeSection, setActiveSection] = useState(0);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
+
+  const scrollToSection = (index: number) => {
+    if (!lenisRef.current) return;
+    const scrollTarget = index * window.innerHeight;
+    lenisRef.current.scrollTo(scrollTarget, { duration: 1, easing: (t) => t });
+  };
+
   useEffect(() => {
-    if (!loaded || !navRef.current) return;
+    if (!loaded) return;
+
+    // gsap.to(loaderRef.current, {
+    //   // y: 0,
+    //   opacity: 0,
+    //   duration: .5,
+    //   ease: "power3.out",
+    //   // delay: 1.3,
+    // });
 
     gsap.set(navRef.current, { y: -100, opacity: 0 });
 
@@ -33,44 +50,92 @@ export default function Home() {
       opacity: 1,
       duration: 1,
       ease: "power3.out",
-      delay: 1.3,
+      delay: 0.5,
     });
+
+    const lenis = new Lenis({ duration: 0.6, smoothWheel: true, easing: (t) => t });
+    lenisRef.current = lenis;
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      ScrollTrigger.update();
+      rafRef.current = requestAnimationFrame(raf);
+    };
+    rafRef.current = requestAnimationFrame(raf);
+
+    const panels = gsap.utils.toArray<HTMLElement>(".panel");
+    gsap.set(stackRef.current, { position: "relative", overflow: "hidden" });
+    gsap.set(panels, { position: "absolute", inset: 0, yPercent: 100 });
+    if (panels[0]) gsap.set(panels[0], { yPercent: 0 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: stackRef.current!,
+        start: "top top",
+        end: "+=" + (panels.length - 1) * window.innerHeight,
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const activeIndex = Math.min(
+            panels.length - 1,
+            Math.floor(progress * panels.length)
+          );
+          setActiveSection(activeIndex);
+        },
+      },
+      defaults: { ease: "power2.out", duration: 1 },
+    });
+
+    tlRef.current = tl;
+
+    panels.slice(1).forEach((panel) => {
+      tl.to(panel, { yPercent: 0 }, ">");
+    });
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lenis.destroy();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
   }, [loaded]);
 
   return (
-    <main className="w-full h-screen mx-auto">
-      <div className="w-full max-w-screen h-screen bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)]">
-        {!loaded && <CustomLoader onLoaded={() => setLoaded(true)} />}
+    <main className="w-full h-screen relative">
+      <BackgroundVid />
 
-        {loaded && (
-          <>
-            <div ref={navRef} className="opacity-0 fixed top-0 left-0 w-full z-50">
-              <Navbar />
-            </div>
-            <section id="home" className="h-screen inset-0 flex flex-col items-center justify-center text-center text-white">
-              <Hero />
-            </section>
-          </>
-        )}
+      <div
+        ref={loaderRef}
+        className={`absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+      >
+        <CustomLoader onLoaded={() => setLoaded(true)} />
       </div>
 
-      {loaded && (
-        <>
-          <section id="about" className="section flex items-center justify-center h-screen bg-white">
-            <h1>ABOUT</h1>
-          </section>
+      <div ref={stackRef} className="h-screen">
+        <div ref={navRef} className="opacity-0 fixed top-0 left-0 w-full z-50">
+          <Navbar activeSection={activeSection} scrollToSection={scrollToSection} />
+        </div>
 
-          <section id="merch" className="section flex items-center justify-center h-screen bg-white">
-            <h1>MERCH</h1>
-          </section>
+        <section
+          id="home"
+          className="panel h-screen flex items-center justify-center text-white "
+        >
+          <Hero />
+        </section>
 
-          <section id="newsletter" className="section flex items-center justify-center h-screen bg-white">
-            <h1>NEWSLETTER</h1>
-          </section>
-        </>
-      )}
-
-
+        <section id="about" className="panel border-t-2 h-screen flex items-center justify-center bg-white">
+          <h1>ABOUT</h1>
+        </section>
+        <section id="merch" className="panel border-t-2 h-screen flex items-center justify-center bg-white">
+          <h1>MERCH</h1>
+        </section>
+        <section id="newsletter" className="panel border-t-2 h-screen flex items-center justify-center bg-white">
+          <h1>NEWSLETTER</h1>
+        </section>
+      </div>
     </main>
+
   );
 }

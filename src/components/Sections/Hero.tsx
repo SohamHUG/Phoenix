@@ -52,7 +52,7 @@ export default function Hero() {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: 1.3,
+            delay: 1.8,
         });
 
     }, []);
@@ -128,7 +128,10 @@ export default function Hero() {
             </Canvas>
 
             <div className="absolute w-[514px] h-[153px] right-10 top-1/4">
-                <p ref={titleRef} className="opacity-0 font-geist font-semibold text-[64px] leading-[80%] tracking-[-0.06em] uppercase text-left">
+                <p
+                    ref={titleRef}
+                    className="opacity-0 font-geist font-semibold text-[64px] leading-[80%] tracking-[-0.06em] uppercase text-left effect-shine"
+                >
                     from ashes to anthem the rise of phoenix
                 </p>
             </div>

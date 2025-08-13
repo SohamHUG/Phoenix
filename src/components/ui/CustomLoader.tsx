@@ -14,13 +14,13 @@ export default function CustomLoader({ onLoaded }: { onLoaded: () => void }) {
                 gsap.to(".loader-wrapper", {
                     opacity: 0,
                     duration: 0.8,
-                    ease: "power2.out",
+                    ease: "power3.out",
                     onComplete: () => {
                         setVisible(false);
                         onLoaded();
                     },
                 });
-            }, 1500); 
+            }, 300);
 
             return () => clearTimeout(timer);
         }
@@ -29,7 +29,7 @@ export default function CustomLoader({ onLoaded }: { onLoaded: () => void }) {
     if (!visible) return null;
 
     return (
-        <div className="loader-wrapper fixed inset-0 flex flex-col items-center justify-center">
+        <div className="loader-wrapper fixed inset-0 flex flex-col items-center justify-center z-10">
             <Image
                 src="/logo.svg"
                 alt="Logo"

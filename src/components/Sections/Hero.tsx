@@ -102,30 +102,55 @@ export default function Hero() {
     return (
         <div className="relative w-full h-screen">
             <Canvas className="absolute inset-0">
-                <ambientLight intensity={0.5} color="#404040" />
-                <directionalLight position={[5, 5, 15]} intensity={2} />
-                <pointLight
-                    position={[10, 10, 10]}
+                <ambientLight intensity={1.5} color="#ffffff" />
+
+                <directionalLight
+                    position={[5, 5, 15]}
+                    intensity={1.5}
+                    color="#ffc362"
+                    castShadow
+                />
+
+                <directionalLight
+                    position={[7, -5, 15]}
                     intensity={1.5}
                     color="#FF5304"
-                    distance={20}
-                    decay={1}
                 />
-                <pointLight
-                    position={[-10, -10, -10]}
-                    intensity={0.8}
-                    color="#00a2ff"
-                    distance={15}
+
+                <directionalLight
+                    position={[0, 10, 15]}
+                    intensity={1.5}
+                    color="#f38415"
                 />
-                <pointLight
-                    position={[0, 10, -5]}
-                    intensity={0.5}
-                    color="#ffffff"
-                    distance={10}
+
+                <directionalLight
+                    position={[0, -10, 15]}
+                    intensity={1.5}
+                    color="#e82929"
+                />
+
+                <directionalLight
+                    position={[-6, 1, 15]}
+                    intensity={0.6}
+                    color="#ff9072"
+                />
+
+                <directionalLight
+                    position={[-5, -3, 15]}
+                    intensity={0.6}
+                    color="#3c296a"
+                />
+
+                <directionalLight
+                    position={[-7, -10, 15]}
+                    intensity={0.6}
+                    color="#3c296a"
                 />
                 <EnvironmentMap preset="city" />
+
                 <Phx />
             </Canvas>
+
 
             <div className="absolute w-[514px] h-[153px] right-10 top-1/4">
                 <p

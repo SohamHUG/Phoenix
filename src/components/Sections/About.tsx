@@ -6,7 +6,7 @@ import gsap from "gsap";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import AnimatedSVG from "../ui/AnimatedSVG";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { descriptions } from "@/Utils/DescAbout";
+import { descriptions } from "@/Data/DescAbout";
 import { SplitText } from "gsap/SplitText";
 
 if (typeof window !== "undefined") {

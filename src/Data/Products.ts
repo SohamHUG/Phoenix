@@ -1,0 +1,42 @@
+export const products = [
+    {
+        name: "Bottle",
+        image: "/img/merch/bottle.png",
+        oldPrice: "$29.00",
+        price: "$14.50",
+        rating: "4.0 stars",
+        reviews: "3504 reviews",
+    },
+    {
+        name: "T-Shirt",
+        image: "/img/merch/t-shirt.png",
+        oldPrice: "$50.00",
+        price: "$25.00",
+        rating: "4.5 stars",
+        reviews: "1200 reviews",
+    },
+    {
+        name: "Speaker",
+        image: "/img/merch/speaker.png",
+        oldPrice: "$120.00",
+        price: "$60.00",
+        rating: "4.7 stars",
+        reviews: "850 reviews",
+    },
+    {
+        name: "Mug",
+        image: "/img/merch/mug.png",
+        oldPrice: "$20.00",
+        price: "$10.00",
+        rating: "4.2 stars",
+        reviews: "560 reviews",
+    },
+    {
+        name: "Bag",
+        image: "/img/merch/bag.png",
+        oldPrice: "$80.00",
+        price: "$40.00",
+        rating: "4.3 stars",
+        reviews: "900 reviews",
+    },
+];

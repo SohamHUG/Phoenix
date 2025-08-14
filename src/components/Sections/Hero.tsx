@@ -137,13 +137,13 @@ export default function Hero() {
 
                 <directionalLight
                     position={[-5, -3, 15]}
-                    intensity={0.6}
+                    intensity={0.2}
                     color="#3c296a"
                 />
 
                 <directionalLight
                     position={[-7, -10, 15]}
-                    intensity={0.6}
+                    intensity={0.4}
                     color="#3c296a"
                 />
                 <EnvironmentMap preset="city" />

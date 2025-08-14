@@ -8,11 +8,12 @@ import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
 
 interface AnimatedSVGProps {
-    svg: string; 
+    svg: string;
     duration?: number;
+    shouldDraw?: boolean;
 }
 
-export default function AnimatedSVG({ svg, duration = 3 }: AnimatedSVGProps) {
+export default function AnimatedSVG({ svg, duration = 3, shouldDraw }: AnimatedSVGProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

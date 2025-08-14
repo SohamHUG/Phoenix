@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
@@ -23,10 +23,10 @@ export default function About({ active }: { active: boolean }) {
     const hasAnimated = useRef(false);
     const [shouldDraw, setShouldDraw] = useState(false);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const ctx = gsap.context(() => {
 
-            const title = document.querySelectorAll<HTMLElement>(".title-reveal");
+            const title = sectionRef.current?.querySelectorAll<HTMLElement>(".title-reveal") || [];
             const whatWeDoEl = document.querySelectorAll<HTMLElement>(".what-we-do");
             const knowMoreEl = document.querySelectorAll<HTMLElement>(".know-more");
             const buttons = sectionRef.current?.querySelectorAll<HTMLElement>(".about-btn") || [];
@@ -120,12 +120,22 @@ export default function About({ active }: { active: boolean }) {
         return () => {
             ctx.revert();
             hasAnimated.current = false;
+            setShouldDraw(false);
         };
     }, []);
 
+    // useEffect(() => {
+
+    //     if (active && !hasAnimated.current) {
+    //         animationRef.current?.play();
+    //         hasAnimated.current = true;
+    //     } 
+    // }, [active]);
+
+
 
     return (
-        <div ref={sectionRef} className="flex flex-col items-start justify-center w-full h-full mt-6">
+        <div ref={sectionRef} className="flex flex-col items-start justify-center w-full h-full mt-6 animate">
             <div className="test-1 flex items-center">
                 <p className="flex justify-start items-center font-geist font-semibold leading-[80%] tracking-[-0.06em] text-5xl border-[0.5px] border-[#AAAAAA] py-[65px] px-[48px] h-[230px] w-[1009px]">
                     <span className="w-[514px] text-left">

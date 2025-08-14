@@ -96,12 +96,12 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
                 className={`absolute top-full right-[-4] w-[315px] rounded shadow-lg my-2 py-1 z-30 bg-[#FF5304]`}
                 style={{ opacity: 0, pointerEvents: isExpanded ? 'auto' : 'none' }}
             >
-                <Link href="/spotify" className="px-4 py-3 h-28 hover:bg-opacity-20 bg-white hover:bg-[#DEDFDF] mx-3 my-3 flex items-center justify-center rounded">
+                <p className="px-4 py-3 h-28 hover:bg-opacity-20 bg-white hover:bg-[#DEDFDF] mx-3 my-3 flex items-center justify-center rounded">
                     <Image src="/img/spotify.png" alt="Spotify" width={110} height={26} />
-                </Link>
-                <Link href="/apple-music" className="px-4 py-3 h-28 hover:bg-opacity-20 bg-white hover:bg-[#DEDFDF] mx-3 my-3 flex items-center justify-center rounded">
+                </p>
+                <p className="px-4 py-3 h-28 hover:bg-opacity-20 bg-white hover:bg-[#DEDFDF] mx-3 my-3 flex items-center justify-center rounded">
                     <Image src="/img/applemusic.png" alt="Apple Music" width={110} height={26} />
-                </Link>
+                </p>
             </div>
         </div>
 

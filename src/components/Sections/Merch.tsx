@@ -2,13 +2,86 @@
 
 import Image from "next/image";
 import { products } from "@/Data/Products";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { SplitText } from "gsap/SplitText";
+
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 
-export default function Merch() {
+export default function Merch({ active }: { active: boolean }) {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const animationRef = useRef<gsap.core.Timeline>(null);
+    const hasAnimated = useRef(false);
+
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+
+            const products = sectionRef.current?.querySelectorAll<HTMLElement>(".products") || [];
+
+            const title = sectionRef.current?.querySelectorAll<HTMLElement>(".letter-reveal") || [];
+            const letters = new SplitText(title).chars;
+
+            [...title].forEach((h1) => {
+                h1.style.display = 'block'
+            });
+
+            animationRef.current = gsap.timeline({
+                paused: true,
+                reversed: true
+            })
+                .fromTo(letters,
+                    {
+                        y: 100,
+                        rotation: 10,
+                        opacity: 0
+                    },
+                    {
+                        y: 0,
+                        rotation: 0,
+                        opacity: 1,
+                        duration: 0.3,
+                        stagger: 0.05,
+                        ease: "power3.inOut"
+                    }
+                )
+                .fromTo(products,
+                    { opacity: 0, y: 100 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        stagger: 0.2,
+                        ease: "power3.out",
+                    }, ">"
+                )
+
+        }, sectionRef);
+
+        return () => {
+            ctx.revert();
+            hasAnimated.current = false;
+        };
+    }, []);
+
+    useEffect(() => {
+        if (active) {
+            animationRef.current?.play();
+            hasAnimated.current = true;
+        } else {
+            animationRef.current?.reverse();
+        }
+    }, [active]);
+
+    console.log(active)
+
     return (
-        <div className="w-full h-full flex flex-col items-center mt-28">
+        <div ref={sectionRef} className="w-full h-full flex flex-col items-center mt-28">
             <div className="relative w-full max-w-[1824px]">
-                {/* Image de fond */}
                 <Image
                     src="/img/merch/banner-merch.png"
                     alt="Banner Phoenix"
@@ -17,10 +90,10 @@ export default function Merch() {
                     className="w-full h-auto"
                 />
 
-                {/* Contenu superposé */}
                 <div className="absolute inset-0 flex justify-between items-center px-16">
                     <p className="font-geist font-semibold text-4xl leading-[80%] tracking-[-0.06em] text-white w-[380px] effect-shine">
-                        /CHECKOUT OUR MERCH
+                        <span className="letter-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">/CHECKOUT OUR</span>
+                        <span className="letter-reveal [clip-path:inset(0px_0px_0px_0px)] hidden"> MERCH</span>
                     </p>
 
                     <Image
@@ -31,7 +104,7 @@ export default function Merch() {
                         className="object-contain absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                     />
 
-                    <p className="font-geist font-semibold text-4xl leading-[80%] tracking-[-0.06em] text-white cursor-default effect-shine">
+                    <p className="letter-reveal [clip-path:inset(0px_0px_0px_0px)] hidden font-geist font-semibold text-4xl leading-[80%] tracking-[-0.06em] text-white cursor-default effect-shine">
                         FLAT 50% OFF
                     </p>
                 </div>
@@ -41,7 +114,7 @@ export default function Merch() {
                 {products.map((product, idx) => (
                     <div
                         key={idx}
-                        className="relative overflow-hidden group "
+                        className="relative overflow-hidden group products"
                         style={{ flex: '0 1 300px', height: '498px' }}
                     >
                         <Image

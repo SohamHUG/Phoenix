@@ -56,7 +56,7 @@ export default function Home() {
       delay: 0.5,
     });
 
-    const lenis = new Lenis({ duration: 1, smoothWheel: false, easing: (t) => t });
+    const lenis = new Lenis({ duration: 1, smoothWheel: false, easing: (t) => t }, );
     lenisRef.current = lenis;
 
     const raf = (time: number) => {
@@ -125,19 +125,19 @@ export default function Home() {
           id="home"
           className="panel h-screen flex items-center justify-center text-white "
         >
-          <Hero />
+          <Hero  scrollToMerch={() => scrollToSection(2)}/>
         </section>
 
-        <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF]">
+        <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
           <About active={activeSection === 1} />
         </section>
 
-        <section id="merch" className="panel h-screen flex w-full bg-[#DEDFDF]">
-          <Merch />
+        <section id="merch" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+          <Merch active={activeSection === 2} />
         </section>
-        
-        <section id="newsletter" className="panel h-screen flex w-full bg-[#DEDFDF]">
-          <NewsLetter />
+
+        <section id="newsletter" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+          <NewsLetter active={activeSection === 3} />
         </section>
       </div>
     </main>

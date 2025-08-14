@@ -8,7 +8,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { title } from "process";
 
-export default function Hero() {
+export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
     const mainButtonRef = useRef<HTMLButtonElement>(null);
     const dotsButtonRef = useRef<HTMLButtonElement>(null);
     const titleRef = useRef<HTMLParagraphElement>(null);
@@ -172,6 +172,7 @@ export default function Hero() {
                     >
                         <button
                             ref={mainButtonRef}
+                            onClick={scrollToMerch}
                             className={`absolute left-0 top-0 h-[60px] font-inter tracking-[0.06em] uppercase rounded font-extrabold text-[16px] transition-all duration-300 flex items-center justify-center z-20 hover:bg-[#FF5304] hover:cursor-pointer bg-white text-[#2F2F2F]`}
                             style={{ width: 200 }}
                         >

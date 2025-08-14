@@ -11,6 +11,7 @@ import { div } from "three/tsl";
 import BackgroundVid from "@/components/ui/BackgroundVid";
 import About from "@/components/Sections/About";
 import Merch from "@/components/Sections/Merch";
+import NewsLetter from "@/components/Sections/NewsLetter";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -135,8 +136,8 @@ export default function Home() {
           <Merch />
         </section>
         
-        <section id="newsletter" className="panel border-t-2 h-screen flex items-center justify-center bg-white">
-          <h1>NEWSLETTER</h1>
+        <section id="newsletter" className="panel h-screen flex w-full bg-[#DEDFDF]">
+          <NewsLetter />
         </section>
       </div>
     </main>

@@ -106,7 +106,7 @@ export default function NewsLetter({ active }: { active: boolean }) {
 
                     <div className="w-1/3"></div>
 
-                    <p className="font-inter font-light text-[16px] text-white w-1/3 credits">
+                    <p className="font-inter font-light text-sm text-white w-1/3 credits text-center">
                         Copyright: “© 2025 Phoenix / B-WEEK Entertainment. All Rights Reserved.”
                     </p>
 

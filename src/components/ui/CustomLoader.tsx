@@ -20,7 +20,7 @@ export default function CustomLoader({ onLoaded }: { onLoaded: () => void }) {
                         onLoaded();
                     },
                 });
-            }, 300);
+            }, 1000);
 
             return () => clearTimeout(timer);
         }

@@ -54,7 +54,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: 1.2,
+            delay: 1.8,
         });
 
         gsap.to(merchRef.current, {
@@ -62,7 +62,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: 1.2,
+            delay: 2.4,
         });
 
         gsap.to(scrollRef.current, {
@@ -70,7 +70,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: 1.8,
+            delay: 3.1,
         });
 
     }, []);

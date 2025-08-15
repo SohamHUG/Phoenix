@@ -53,7 +53,7 @@ export default function Home() {
       opacity: 1,
       duration: 1,
       ease: "power3.out",
-      delay: 0.5,
+      delay: 3.1,
     });
 
     const lenis = new Lenis({ duration: 1, smoothWheel: false, easing: (t) => t },);
@@ -88,7 +88,7 @@ export default function Home() {
           setActiveSection(activeIndex);
         },
       },
-      defaults: { ease: "power2.out", duration: 1 },
+      defaults: { ease: "power2.out", duration: 0.8 },
     });
 
     tlRef.current = tl;
@@ -109,40 +109,45 @@ export default function Home() {
       {/* <BackgroundVid /> */}
 
       {/* <div className="w-full h-screen bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)]"> */}
-      <div
-        ref={loaderRef}
-        className={`bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-      >
-        <CustomLoader onLoaded={() => setLoaded(true)} />
-      </div>
 
-      <div ref={stackRef} className="h-screen">
-        <div ref={navRef} className="opacity-0 fixed top-0 left-0 w-full z-50">
-          <Navbar activeSection={activeSection} scrollToSection={scrollToSection} />
-        </div>
-
-        <section
-          id="home"
-          className="bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] panel h-screen flex items-center justify-center text-white "
+      {!loaded && (
+        <div
+          ref={loaderRef}
+          className={`bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
         >
-          <Hero scrollToMerch={() => scrollToSection(2)} />
-        </section>
+          <CustomLoader onLoaded={() => setLoaded(true)} />
+        </div>
+      )}
 
-        {/* </div> */}
+      {loaded && (
+        <div ref={stackRef} className="h-screen">
+          <div ref={navRef} className="opacity-0 fixed top-0 left-0 w-full z-50">
+            <Navbar activeSection={activeSection} scrollToSection={scrollToSection} />
+          </div>
 
-        <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
-          <About active={activeSection === 1} />
-        </section>
+          <section
+            id="home"
+            className="bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] panel h-screen flex items-center justify-center text-white "
+          >
+            <Hero scrollToMerch={() => scrollToSection(2)} />
+          </section>
 
-        <section id="merch" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
-          <Merch active={activeSection === 2} />
-        </section>
+          {/* </div> */}
 
-        <section id="newsletter" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
-          <NewsLetter active={activeSection === 3} />
-        </section>
-      </div>
+          <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+            <About active={activeSection === 1} />
+          </section>
+
+          <section id="merch" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+            <Merch active={activeSection === 2} />
+          </section>
+
+          <section id="newsletter" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+            <NewsLetter active={activeSection === 3} />
+          </section>
+        </div>
+      )}
     </main>
 
   );

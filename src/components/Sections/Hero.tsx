@@ -37,7 +37,8 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             rotation: 10,
             duration: 0.5,
             stagger: 0.09,
-            ease: "power3.inOut"
+            ease: "power3.inOut",
+            delay: 0.9,
         },)
 
         // gsap.to(titleRef.current, {
@@ -53,7 +54,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: 0.5,
+            delay: 1.2,
         });
 
         gsap.to(merchRef.current, {
@@ -61,7 +62,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             opacity: 1,
             duration: 1,
             ease: "power3.out",
-            delay: .9,
+            delay: 1.2,
         });
 
         gsap.to(scrollRef.current, {
@@ -117,7 +118,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
 
 
     return (
-        <div className="relative w-full h-screen flex justify-center items-center overflow-hidden">
+        <div className="relative w-full h-screen flex justify-center items-center">
             <Canvas
                 className="absolute inset-0"
                 // dpr={window.devicePixelRatio}

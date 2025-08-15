@@ -25,7 +25,8 @@
     "react-dom": "^19.0.0",
     "react-howler": "^5.2.0",
     "tailwind-merge": "^3.2.0",
-    "three": "^0.176.0"
+    "three": "^0.176.0",
+    "three-mesh-bvh": "^0.9.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

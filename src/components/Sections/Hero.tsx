@@ -123,50 +123,51 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
                 className="absolute inset-0"
                 // dpr={window.devicePixelRatio}
                 style={{ height: 1500 }}
+            // style={{ width: "100%", height: "100%" }}
             >
                 <ambientLight intensity={2} color="#ffffff" />
 
                 <directionalLight
                     position={[5, 5, 15]}
                     intensity={1.5}
-                    color="#fff"
+                    color="#ffc362"
                     castShadow
                 />
 
                 <directionalLight
                     position={[7, -5, 15]}
                     intensity={1.5}
-                    color="#fff"
+                    color="#FF5304"
                 />
 
                 <directionalLight
                     position={[0, 10, 15]}
                     intensity={1.5}
-                    color="#fff"
+                    color="#f38415"
                 />
 
                 <directionalLight
                     position={[0, -10, 15]}
                     intensity={1.5}
-                    color="#fff"
+                    color="#e82929"
                 />
 
                 <directionalLight
                     position={[-6, 1, 15]}
                     intensity={0.6}
-                    color="#fff"
+                    color="#ff9072"
                 />
 
                 <directionalLight
                     position={[-5, -3, 15]}
                     intensity={0.2}
-                    color="#fff"
+                    color="#3c296a"
                 />
 
                 <directionalLight
                     position={[-7, -10, 15]}
                     intensity={0.4}
-                    color="#fff"
+                    color="#3c296a"
                 />
                 <EnvironmentMap preset="city" />
 

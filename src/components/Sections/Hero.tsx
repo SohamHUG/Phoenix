@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { title } from "process";
+import { SplitText } from "gsap/SplitText";
 
 export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
     const mainButtonRef = useRef<HTMLButtonElement>(null);
@@ -18,18 +19,34 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
 
     useEffect(() => {
 
-        gsap.set(titleRef.current, { x: 1000, opacity: 0 });
+        // gsap.set(titleRef.current, { x: 1000, opacity: 0 });
         gsap.set(imageRef.current, { x: 1000, opacity: 0 });
         gsap.set(merchRef.current, { x: -1000, opacity: 0 });
         gsap.set(scrollRef.current, { y: 100, opacity: 0 });
 
-        gsap.to(titleRef.current, {
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            delay: 0.5,
+
+        const titleEl = titleRef.current?.querySelectorAll<HTMLElement>(".from-reveal") || [];
+        const letters = new SplitText(titleEl).chars;
+
+        [...titleEl].forEach((h1) => {
+            h1.style.display = 'block'
         });
+
+        gsap.from(letters, {
+            y: 100,
+            rotation: 10,
+            duration: 0.5,
+            stagger: 0.09,
+            ease: "power3.inOut"
+        },)
+
+        // gsap.to(titleRef.current, {
+        //     x: 0,
+        //     opacity: 1,
+        //     duration: 1,
+        //     ease: "power3.out",
+        //     delay: 0.5,
+        // });
 
         gsap.to(imageRef.current, {
             x: 0,
@@ -100,51 +117,55 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
 
 
     return (
-        <div className="relative w-full h-screen">
-            <Canvas className="absolute inset-0">
-                <ambientLight intensity={1.5} color="#ffffff" />
+        <div className="relative w-full h-screen flex justify-center items-center overflow-hidden">
+            <Canvas
+                className="absolute inset-0"
+                // dpr={window.devicePixelRatio}
+                style={{ height: 1500 }}
+            >
+                <ambientLight intensity={2} color="#ffffff" />
 
                 <directionalLight
                     position={[5, 5, 15]}
                     intensity={1.5}
-                    color="#ffc362"
+                    color="#fff"
                     castShadow
                 />
 
                 <directionalLight
                     position={[7, -5, 15]}
                     intensity={1.5}
-                    color="#FF5304"
+                    color="#fff"
                 />
 
                 <directionalLight
                     position={[0, 10, 15]}
                     intensity={1.5}
-                    color="#f38415"
+                    color="#fff"
                 />
 
                 <directionalLight
                     position={[0, -10, 15]}
                     intensity={1.5}
-                    color="#e82929"
+                    color="#fff"
                 />
 
                 <directionalLight
                     position={[-6, 1, 15]}
                     intensity={0.6}
-                    color="#ff9072"
+                    color="#fff"
                 />
 
                 <directionalLight
                     position={[-5, -3, 15]}
                     intensity={0.2}
-                    color="#3c296a"
+                    color="#fff"
                 />
 
                 <directionalLight
                     position={[-7, -10, 15]}
                     intensity={0.4}
-                    color="#3c296a"
+                    color="#fff"
                 />
                 <EnvironmentMap preset="city" />
 
@@ -155,9 +176,11 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             <div className="absolute w-[514px] h-[153px] right-10 top-1/4">
                 <p
                     ref={titleRef}
-                    className="opacity-0 font-geist font-semibold text-[64px] leading-[80%] tracking-[-0.06em] uppercase text-left effect-shine"
+                    className="font-geist font-semibold text-[64px] leading-[80%] tracking-[-0.06em] uppercase text-left effect-shine"
                 >
-                    from ashes to anthem the rise of phoenix
+                    <span className="from-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">from ashes to</span>
+                    <span className="from-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">anthem the rise</span>
+                    <span className="from-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">of phoenix</span>
                 </p>
             </div>
 

@@ -56,7 +56,7 @@ export default function Home() {
       delay: 0.5,
     });
 
-    const lenis = new Lenis({ duration: 1, smoothWheel: false, easing: (t) => t }, );
+    const lenis = new Lenis({ duration: 1, smoothWheel: false, easing: (t) => t },);
     lenisRef.current = lenis;
 
     const raf = (time: number) => {
@@ -106,11 +106,12 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen relative">
-      <BackgroundVid />
+      {/* <BackgroundVid /> */}
 
+      {/* <div className="w-full h-screen bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)]"> */}
       <div
         ref={loaderRef}
-        className={`absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
+        className={`bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
       >
         <CustomLoader onLoaded={() => setLoaded(true)} />
@@ -123,10 +124,12 @@ export default function Home() {
 
         <section
           id="home"
-          className="panel h-screen flex items-center justify-center text-white "
+          className="bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] panel h-screen flex items-center justify-center text-white "
         >
-          <Hero  scrollToMerch={() => scrollToSection(2)}/>
+          <Hero scrollToMerch={() => scrollToSection(2)} />
         </section>
+
+        {/* </div> */}
 
         <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
           <About active={activeSection === 1} />

@@ -7,8 +7,10 @@ import { vertex as VERTEX_SHADER } from "./gpgpu/shaders/vertex";
 import { fragment as FRAGMENT_SHADER } from "./gpgpu/shaders/fragment";
 
 import GPGPU from "./gpgpu/GPGPU";
+import GPGPUEvents from './gpgpu/GPGPUEvents'
 
 import PostProcessing from "./postprocessing/index.js";
+import gsap from "gsap";
 
 type PhxProps = {
     rotation?: [number, number, number];
@@ -17,7 +19,7 @@ type PhxProps = {
 
 export default function Phx({
     rotation = [Math.PI / 2, 0, 0],
-    size = 1100,
+    size = 1000,
 }: PhxProps) {
     const pointsRef = useRef<THREE.Points | null>(null);
     const gpgpuRef = useRef<any>(null);
@@ -28,12 +30,22 @@ export default function Phx({
         nodes: { Curve002: THREE.Mesh };
     };
 
+    const mouseRef = useRef(Object.assign(new THREE.EventDispatcher(), {
+        cursorPosition: new THREE.Vector2(0, 0),
+    }));
+
     useEffect(() => {
         const onMove = (e: MouseEvent) => {
             const x = (e.clientX / window.innerWidth) * 2 - 1;
-            const y = (e.clientY / window.innerHeight) * 2 - 1;
-            setMouse({ x, y });
+            const y = -(e.clientY / window.innerHeight) * 2 + 1; 
+            mouseRef.current.cursorPosition.set(x, y);
+
+            (mouseRef.current as any).dispatchEvent({
+                type: "mousemove",
+                ...mouseRef.current.cursorPosition.clone(),
+            });
         };
+
         window.addEventListener("mousemove", onMove);
         return () => window.removeEventListener("mousemove", onMove);
     }, []);
@@ -41,11 +53,18 @@ export default function Phx({
     useEffect(() => {
         if (!nodes?.Curve002) return;
 
+        const model = nodes.Curve002;
+        const rotatedGeom = model.geometry.clone();
+        rotatedGeom.rotateX(Math.PI / 2);
+        model.geometry = rotatedGeom;
+        model.updateMatrixWorld(true);
+
         const gpgpu = new (GPGPU as any)({
             size,
             camera,
             renderer: gl,
-            mouse: { cursorPosition: new THREE.Vector2(0, 0) },
+            // mouse: { cursorPosition: new THREE.Vector2(0, 0) },
+            mouse: mouseRef.current,
             scene,
             model: nodes.Curve002,
             sizes: { width: size, height: size },
@@ -69,6 +88,7 @@ export default function Phx({
                 uVelocityTexture: { value: velRT },
                 uResolution: { value: new THREE.Vector2(size, size) },
                 uParticleSize: { value: 2.0 },
+                uOpacity: { value: 0 },
             },
             vertexShader: VERTEX_SHADER,
             fragmentShader: FRAGMENT_SHADER,
@@ -78,9 +98,19 @@ export default function Phx({
             transparent: true,
         });
 
+        gsap.to(material.uniforms.uOpacity, {
+            value: 1,
+            duration: 2,
+            ease: "power2.out",
+            delay: 0.5
+        });
+
         const points = new THREE.Points(geometry, material);
         pointsRef.current = points;
         scene.add(points);
+
+        const events = new GPGPUEvents(mouseRef.current, camera, nodes.Curve002, gpgpu.uniforms);
+        gpgpu.events = events;
 
         gpgpuRef.current = gpgpu;
 
@@ -97,15 +127,9 @@ export default function Phx({
         if (!g) return;
 
         const t = state.clock.getElapsedTime();
+        g.compute(t);
 
-        if (g.uniforms?.velocityUniforms) {
-            const mouseVec = (g.uniforms.velocityUniforms.uMouse?.value ??
-                new THREE.Vector2()) as THREE.Vector2;
-            mouseVec.set(mouse.x, mouse.y);
-            g.uniforms.velocityUniforms.uTime.value = t;
-        }
-
-        g.compute();
+        if (g.events) g.events.update();
 
         const points = pointsRef.current;
         if (points) {
@@ -115,12 +139,13 @@ export default function Phx({
             mat.uniforms.uVelocityTexture.value = g.gpgpuCompute.getCurrentRenderTarget(g.velocityVariable)
                 .texture as THREE.Texture;
 
-            points.rotation.x = THREE.MathUtils.lerp(
-                points.rotation.x,
-                rotation[0] + mouse.y * 0.3,
-                0.1
-            );
-            points.rotation.z = THREE.MathUtils.lerp(points.rotation.z, mouse.x * -0.3, 0.1);
+            const cursor = mouseRef.current.cursorPosition;
+            const targetRotationX = cursor.y * -0.25;   // front/back
+            const targetRotationZ = cursor.x * 0.25; // left/right
+
+            // (lerp)
+            points.rotation.x += (targetRotationX - points.rotation.x) * 0.05;
+            points.rotation.y += (targetRotationZ - points.rotation.y) * 0.05;
         }
     });
 

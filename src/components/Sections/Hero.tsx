@@ -122,8 +122,21 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             <Canvas
                 className="absolute inset-0"
                 // dpr={window.devicePixelRatio}
-                style={{ height: 1500 }}
-            // style={{ width: "100%", height: "100%" }}
+                // style={{ height: 1500 }}
+                style={{ width: "100%", height: "100%" }}
+                camera={{
+                    fov: 75,
+                    near: 0.1,
+                    far: 1000,
+                    position: [0, 0, 3] 
+                }}
+                // scene={{ rotation: [Math.PI / 2, 0, 0] }}
+
+                onCreated={({ scene, camera }) => {
+                    // scene.rotation.set(Math.PI / 2, 0, 0); 
+                    camera.lookAt(0, 0, 0);      
+         
+                }}
             >
                 <ambientLight intensity={2} color="#ffffff" />
 
@@ -172,6 +185,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
                 <EnvironmentMap preset="city" />
 
                 <Phx />
+
             </Canvas>
 
 

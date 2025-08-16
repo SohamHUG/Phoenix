@@ -38,7 +38,7 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
 
         gsap.fromTo(menuRef.current,
             { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.2, delay: 0.6 }
+            { opacity: 1, y: 0, duration: 0.2 }
         );
     };
 

@@ -114,6 +114,7 @@ export default function Phx({
 
         // anim gsap
         gsap.to(points.rotation, {
+            // opacity: 1,
             x: 0,
             y: 0,
             z: 0,
@@ -122,6 +123,7 @@ export default function Phx({
         })
 
         gsap.to(points.scale, {
+            // opacity: 1,
             x: 1,
             y: 1,
             z: 1,

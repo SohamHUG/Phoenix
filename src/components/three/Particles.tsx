@@ -1,6 +1,7 @@
-import { useRef, useMemo } from "react"
+import { useRef, useMemo, useEffect } from "react"
 import { useFrame } from "@react-three/fiber"
 import * as THREE from "three"
+import gsap from "gsap"
 
 type ParticlesProps = {
     count?: number
@@ -56,16 +57,18 @@ export function Particles({ count = 800 }: ParticlesProps) {
     // Shader custom
     const material = useMemo(() => {
         return new THREE.ShaderMaterial({
-            uniforms: {},
+            uniforms: {
+                uOpacityFactor: { value: 0.0 }, 
+            },
             vertexShader: `
         attribute float aOpacity;
         varying float vOpacity;
         varying vec3 vColor;
+        uniform float uOpacityFactor;
 
         void main() {
-          vOpacity = aOpacity;
+          vOpacity = aOpacity * uOpacityFactor;
           vColor = instanceColor;
-
           vec4 mvPosition = modelViewMatrix * instanceMatrix * vec4(position, 1.0);
           gl_Position = projectionMatrix * mvPosition;
         }
@@ -81,6 +84,16 @@ export function Particles({ count = 800 }: ParticlesProps) {
             transparent: true,
         })
     }, [])
+
+    useEffect(() => {
+        if (material) {
+            gsap.to((material as THREE.ShaderMaterial).uniforms.uOpacityFactor, {
+                value: 1,
+                duration: 2,
+                ease: "power2.out",
+            })
+        }
+    }, [material])
 
     useFrame(({ clock }) => {
         if (!mesh.current) return

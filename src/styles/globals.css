@@ -131,8 +131,7 @@
   }
 }
 
-body,
-main {
+body {
   overflow-x: hidden;
 }
 

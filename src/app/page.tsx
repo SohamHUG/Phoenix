@@ -105,7 +105,7 @@ export default function Home() {
   }, [loaded]);
 
   return (
-    <main className="w-full h-screen relative max-w-scren max-h-screen overflow-hidden">
+    <main className="w-full h-screen relative max-w-scren">
       {/* <BackgroundVid /> */}
 
       {/* <div className="w-full h-screen bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)]"> */}

@@ -56,7 +56,7 @@ export default function Home() {
       delay: 3.1,
     });
 
-    const lenis = new Lenis({ duration: 1, smoothWheel: false, easing: (t) => t },);
+    const lenis = new Lenis({ duration: 0.5, smoothWheel: false, easing: (t) => t },);
     lenisRef.current = lenis;
 
     const raf = (time: number) => {
@@ -105,7 +105,7 @@ export default function Home() {
   }, [loaded]);
 
   return (
-    <main className="w-full h-screen relative">
+    <main className="w-full h-screen relative max-w-scren max-h-screen overflow-hidden">
       {/* <BackgroundVid /> */}
 
       {/* <div className="w-full h-screen bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)]"> */}
@@ -139,7 +139,7 @@ export default function Home() {
               backgroundBlendMode: "overlay",
             }}
           >
-            <Hero scrollToMerch={() => scrollToSection(2)} />
+            <Hero scrollToMerch={() => scrollToSection(2)} active={activeSection === 0} />
           </section>
 
           {/* </div> */}

@@ -38,7 +38,7 @@ function SceneWrapper({ children }: { children: React.ReactNode }) {
     return <group ref={ref}>{children}</group>
 }
 
-export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
+export default function Hero({ scrollToMerch, active }: { scrollToMerch: () => void, active: boolean }) {
     const mainButtonRef = useRef<HTMLButtonElement>(null);
     const dotsButtonRef = useRef<HTMLButtonElement>(null);
     const titleRef = useRef<HTMLParagraphElement>(null);
@@ -141,6 +141,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
 
     return (
         <div className="relative w-full h-screen flex justify-center items-center ">
+            {/* {active && ()} */}
 
             <Canvas
                 className="absolute inset-0"
@@ -162,6 +163,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
 
                 }}
             >
+
                 <SceneWrapper>
                     <ambientLight intensity={2} color="#ffffff" />
 
@@ -171,20 +173,20 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
                         color="#ffc362"
                         castShadow
                     />
-                    <EnvironmentMap preset="city" />
+                    {/* <EnvironmentMap preset="city" /> */}
 
                     <Phx />
 
                     <EffectComposer multisampling={0}>
                         <Bloom
-                            intensity={1.1}             // force du glow
+                            intensity={1}             // force du glow
                             luminanceThreshold={0.0}     
                             luminanceSmoothing={.9}
-                            radius={0.4}
+                            radius={0.5}
                             blendFunction={BlendFunction.SCREEN}
                         />
                     </EffectComposer>
-                    <Particles />
+                    {active && <Particles />}
                 </SceneWrapper>
             </Canvas>
 

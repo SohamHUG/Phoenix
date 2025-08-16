@@ -19,7 +19,7 @@ type PhxProps = {
 
 export default function Phx({
     rotation = [Math.PI / 2, 0, 0],
-    size = 900,
+    size = 1200,
 }: PhxProps) {
     const pointsRef = useRef<THREE.Points | null>(null);
     const gpgpuRef = useRef<any>(null);
@@ -109,7 +109,7 @@ export default function Phx({
         pointsRef.current = points;
         scene.add(points);
 
-        points.rotation.set(Math.PI / 2, 0, 0) // ou une rotation plus exagérée
+        points.rotation.set(Math.PI / 1, 0, 0) // ou une rotation plus exagérée
         points.scale.set(0.5, 0.5, 0.5)
 
         // anim gsap

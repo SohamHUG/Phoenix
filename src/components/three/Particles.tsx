@@ -6,7 +6,7 @@ type ParticlesProps = {
     count?: number
 }
 
-export function Particles({ count = 1300 }: ParticlesProps) {
+export function Particles({ count = 1000 }: ParticlesProps) {
     const mesh = useRef<THREE.InstancedMesh>(null)
     const dummy = new THREE.Object3D()
 

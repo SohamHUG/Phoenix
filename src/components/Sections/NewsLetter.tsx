@@ -16,6 +16,11 @@ export default function NewsLetter({ active }: { active: boolean }) {
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
 
+            const section = sectionRef.current;
+
+            gsap.set(section, { backgroundColor: "#DEDFDF" });
+
+
             const texts = sectionRef.current?.querySelectorAll<HTMLElement>(".lines-reveal") || [];
             let lines: HTMLElement[] = [];
 
@@ -36,11 +41,15 @@ export default function NewsLetter({ active }: { active: boolean }) {
                 paused: true,
                 reversed: true
             })
+                .to(section, {
+                    background: "linear-gradient(252.44deg, #060200 0%, #FF5304 100%)",
+                    duration: 1.4,
+                })
                 .from(formBox, {
                     y: 20,
                     opacity: 0,
                     duration: 0.6,
-                })
+                }, ">")
                 .from(lines, {
                     y: 50,
                     opacity: 0,
@@ -84,8 +93,9 @@ export default function NewsLetter({ active }: { active: boolean }) {
     }, [active]);
 
 
+
     return (
-        <div ref={sectionRef} className="flex justify-center w-full h-full items-center">
+        <div ref={sectionRef} className="sec flex justify-center w-full h-full items-center">
             <div className="w-[1824px] h-[783px] rounded-xl bg-center bg-cover mt-20 p-5 flex flex-col justify-between"
                 style={{ backgroundImage: "url('/img/newsletter-bg.png')" }}>
 

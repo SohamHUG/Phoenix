@@ -143,7 +143,7 @@ export default function Home() {
             <Merch active={activeSection === 2} />
           </section>
 
-          <section id="newsletter" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+          <section id="newsletter" className="panel h-screen flex w-full">
             <NewsLetter active={activeSection === 3} />
           </section>
         </div>

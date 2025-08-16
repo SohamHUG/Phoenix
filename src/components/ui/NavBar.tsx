@@ -16,7 +16,7 @@ export default function Navbar({ activeSection, scrollToSection }: { activeSecti
 
 
     useEffect(() => {
-        const newIsHome = activeSection === 0;
+        const newIsHome = activeSection === 0 || activeSection === 3;
 
         if (newIsHome !== isHomeSection) {
             setIsHomeSection(newIsHome);

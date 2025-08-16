@@ -96,7 +96,7 @@ export default function NewsLetter({ active }: { active: boolean }) {
 
     return (
         <div ref={sectionRef} className="sec flex justify-center w-full h-full min-h-screen items-center overflow-hidden">
-            <div className="w-[1824px] h-[783px] rounded-xl bg-center bg-cover mx-auto mt-15 p-5 flex flex-col justify-between"
+            <div className="w-[1824px] h-[783px] rounded-xl bg-center bg-cover mx-auto mt-10 p-5 flex flex-col justify-between"
                 style={{ backgroundImage: "url('/img/newsletter-bg.png')" }}>
 
                 <div className="bg-black/40 w-[521px] py-20 px-10 rounded-3xl flex flex-col gap-6 form-box">

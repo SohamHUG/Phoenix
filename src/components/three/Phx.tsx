@@ -19,7 +19,7 @@ type PhxProps = {
 
 export default function Phx({
     rotation = [Math.PI / 2, 0, 0],
-    size = 1000,
+    size = 900,
 }: PhxProps) {
     const pointsRef = useRef<THREE.Points | null>(null);
     const gpgpuRef = useRef<any>(null);
@@ -37,7 +37,7 @@ export default function Phx({
     useEffect(() => {
         const onMove = (e: MouseEvent) => {
             const x = (e.clientX / window.innerWidth) * 2 - 1;
-            const y = -(e.clientY / window.innerHeight) * 2 + 1; 
+            const y = -(e.clientY / window.innerHeight) * 2 + 1;
             mouseRef.current.cursorPosition.set(x, y);
 
             (mouseRef.current as any).dispatchEvent({
@@ -88,7 +88,7 @@ export default function Phx({
                 uVelocityTexture: { value: velRT },
                 uResolution: { value: new THREE.Vector2(size, size) },
                 uParticleSize: { value: 2.0 },
-                uOpacity: { value: 0 },
+                // uOpacity: { value: 0 },
             },
             vertexShader: VERTEX_SHADER,
             fragmentShader: FRAGMENT_SHADER,
@@ -98,16 +98,36 @@ export default function Phx({
             transparent: true,
         });
 
-        gsap.to(material.uniforms.uOpacity, {
-            value: 1,
-            duration: 2,
-            ease: "power2.out",
-            delay: 0.5
-        });
+        // gsap.to(material.uniforms.uOpacity, {
+        //     value: 1,
+        //     duration: 2,
+        //     ease: "power2.out",
+        //     delay: 0.5
+        // });
 
         const points = new THREE.Points(geometry, material);
         pointsRef.current = points;
         scene.add(points);
+
+        points.rotation.set(Math.PI / 2, 0, 0) // ou une rotation plus exagérée
+        points.scale.set(0.5, 0.5, 0.5)
+
+        // anim gsap
+        gsap.to(points.rotation, {
+            x: 0,
+            y: 0,
+            z: 0,
+            duration: 2,
+            ease: "power2.out",
+        })
+
+        gsap.to(points.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 2,
+            ease: "power2.out",
+        })
 
         const events = new GPGPUEvents(mouseRef.current, camera, nodes.Curve002, gpgpu.uniforms);
         gpgpu.events = events;
@@ -140,12 +160,12 @@ export default function Phx({
                 .texture as THREE.Texture;
 
             const cursor = mouseRef.current.cursorPosition;
-            const targetRotationX = cursor.y * -0.25;   // front/back
-            const targetRotationZ = cursor.x * 0.25; // left/right
+            const targetRotationX = cursor.y * -0.3;   // front/back
+            const targetRotationZ = cursor.x * 0.3; // left/right
 
             // (lerp)
-            points.rotation.x += (targetRotationX - points.rotation.x) * 0.05;
-            points.rotation.y += (targetRotationZ - points.rotation.y) * 0.05;
+            points.rotation.x += (targetRotationX - points.rotation.x) * 0.1;
+            points.rotation.y += (targetRotationZ - points.rotation.y) * 0.1;
         }
     });
 

@@ -77,7 +77,7 @@ export default function Merch({ active }: { active: boolean }) {
         }
     }, [active]);
 
-    console.log(active)
+    // console.log(active)
 
     return (
         <div ref={sectionRef} className="w-full h-full flex flex-col items-center mt-28">
@@ -122,7 +122,7 @@ export default function Merch({ active }: { active: boolean }) {
                             alt={product.name}
                             width={300}
                             height={498}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-75 group-hover:-translate-y-10"
+                            className="w-auto h-auto object-cover transition-transform duration-500 group-hover:scale-75 group-hover:-translate-y-10"
                         />
 
                         <div className="absolute bottom-0 left-0 w-[349px] h-[145px] bg-white/90 p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex flex-col justify-center gap-2.5">

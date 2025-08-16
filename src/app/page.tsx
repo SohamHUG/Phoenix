@@ -113,8 +113,13 @@ export default function Home() {
       {!loaded && (
         <div
           ref={loaderRef}
-          className={`bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
+          className={`absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
+
+          style={{
+            backgroundImage: "linear-gradient(252.44deg, #040301 39.56%, #FF5304 100%), url('/img/noise_texture.png')",
+            backgroundBlendMode: "overlay",
+          }}
         >
           <CustomLoader onLoaded={() => setLoaded(true)} />
         </div>
@@ -128,7 +133,11 @@ export default function Home() {
 
           <section
             id="home"
-            className="bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)] panel h-screen flex items-center justify-center text-white "
+            className="panel h-screen flex items-center justify-center text-white "
+            style={{
+              backgroundImage: "linear-gradient(252.44deg, #040301 39.56%, #FF5304 100%), url('/img/noise_texture.png')",
+              backgroundBlendMode: "overlay",
+            }}
           >
             <Hero scrollToMerch={() => scrollToSection(2)} />
           </section>

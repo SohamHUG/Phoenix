@@ -28,7 +28,7 @@ void main() {
 	// Mouse repel force
 
 	float mouseDistance = distance( position, uMouse );
-	float maxDistance = 0.1;
+	float maxDistance = 0.15;
 
 
 	if( mouseDistance < maxDistance ) {

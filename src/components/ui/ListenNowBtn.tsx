@@ -16,7 +16,7 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
 
         gsap.to(mainButtonRef.current, {
             width: 160,
-            duration: 0.5,
+            duration: 0.2,
             // delay: 0.1,
             ease: "power2.out",
             onUpdate: () => {
@@ -28,7 +28,7 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
 
         gsap.to(dotsButtonRef.current, {
             opacity: 0,
-            duration: 0.5,
+            duration: 0.1,
             // display: 'none',
             
             onComplete: () => {
@@ -38,7 +38,7 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
 
         gsap.fromTo(menuRef.current,
             { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.3, delay: 0.6 }
+            { opacity: 1, y: 0, duration: 0.2, delay: 0.6 }
         );
     };
 
@@ -47,7 +47,7 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
 
         gsap.to(mainButtonRef.current, {
             width: 120, 
-            duration: 0.3,
+            duration: 0.2,
             ease: "power2.out"
         });
 
@@ -61,7 +61,7 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
         gsap.to(menuRef.current, {
             opacity: 0,
             y: -10,
-            duration: 0.2
+            duration: 0.02
         });
     };
 

@@ -1,13 +1,42 @@
 "use client"
 
 import { EnvironmentMap } from "@react-three/drei"
-import { Canvas } from "@react-three/fiber"
+import { Canvas, useFrame } from "@react-three/fiber"
 import Phx from "../three/Phx"
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { title } from "process";
 import { SplitText } from "gsap/SplitText";
+import * as THREE from 'three'
+import { Particles } from "../three/Particles";
+import { EffectComposer, Bloom } from "@react-three/postprocessing"
+import { BlendFunction } from "postprocessing"
+
+function SceneWrapper({ children }: { children: React.ReactNode }) {
+    const ref = useRef<THREE.Group>(null)
+    const mouse = useRef<[number, number]>([0, 0])
+
+    useEffect(() => {
+        const handleMouse = (e: MouseEvent) => {
+            mouse.current = [
+                (e.clientX / window.innerWidth - 0.5) * 2,
+                (e.clientY / window.innerHeight - 0.5) * 2,
+            ]
+        }
+        window.addEventListener("mousemove", handleMouse)
+        return () => window.removeEventListener("mousemove", handleMouse)
+    }, [])
+
+    useFrame(() => {
+        if (ref.current) {
+            ref.current.rotation.x += (mouse.current[1] * 0.2 - ref.current.rotation.x) * 0.3
+            ref.current.rotation.y += (mouse.current[0] * 0.2 - ref.current.rotation.y) * 0.3
+        }
+    })
+
+    return <group ref={ref}>{children}</group>
+}
 
 export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
     const mainButtonRef = useRef<HTMLButtonElement>(null);
@@ -16,6 +45,7 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
     const merchRef = useRef<HTMLParagraphElement>(null);
     const scrollRef = useRef<HTMLParagraphElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
+
 
     useEffect(() => {
 
@@ -40,14 +70,6 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
             ease: "power3.inOut",
             delay: 0.9,
         },)
-
-        // gsap.to(titleRef.current, {
-        //     x: 0,
-        //     opacity: 1,
-        //     duration: 1,
-        //     ease: "power3.out",
-        //     delay: 0.5,
-        // });
 
         gsap.to(imageRef.current, {
             x: 0,
@@ -118,7 +140,8 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
 
 
     return (
-        <div className="relative w-full h-screen flex justify-center items-center">
+        <div className="relative w-full h-screen flex justify-center items-center ">
+
             <Canvas
                 className="absolute inset-0"
                 // dpr={window.devicePixelRatio}
@@ -128,65 +151,44 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
                     fov: 75,
                     near: 0.1,
                     far: 1000,
-                    position: [0, 0, 3] 
+                    position: [0, 0, 3]
                 }}
                 // scene={{ rotation: [Math.PI / 2, 0, 0] }}
-
-                onCreated={({ scene, camera }) => {
+                gl={{ alpha: true }}
+                onCreated={({ gl, scene, camera }) => {
                     // scene.rotation.set(Math.PI / 2, 0, 0); 
-                    camera.lookAt(0, 0, 0);      
-         
+                    gl.setClearColor(0x000000, 0);
+                    camera.lookAt(0, 0, 0);
+
                 }}
             >
-                <ambientLight intensity={2} color="#ffffff" />
+                <SceneWrapper>
+                    <ambientLight intensity={2} color="#ffffff" />
 
-                <directionalLight
-                    position={[5, 5, 15]}
-                    intensity={1.5}
-                    color="#ffc362"
-                    castShadow
-                />
+                    <directionalLight
+                        position={[5, 5, 15]}
+                        intensity={1.5}
+                        color="#ffc362"
+                        castShadow
+                    />
+                    <EnvironmentMap preset="city" />
 
-                <directionalLight
-                    position={[7, -5, 15]}
-                    intensity={1.5}
-                    color="#FF5304"
-                />
+                    <Phx />
 
-                <directionalLight
-                    position={[0, 10, 15]}
-                    intensity={1.5}
-                    color="#f38415"
-                />
-
-                <directionalLight
-                    position={[0, -10, 15]}
-                    intensity={1.5}
-                    color="#e82929"
-                />
-
-                <directionalLight
-                    position={[-6, 1, 15]}
-                    intensity={0.6}
-                    color="#ff9072"
-                />
-
-                <directionalLight
-                    position={[-5, -3, 15]}
-                    intensity={0.2}
-                    color="#3c296a"
-                />
-
-                <directionalLight
-                    position={[-7, -10, 15]}
-                    intensity={0.4}
-                    color="#3c296a"
-                />
-                <EnvironmentMap preset="city" />
-
-                <Phx />
-
+                    <EffectComposer multisampling={0}>
+                        <Bloom
+                            intensity={1.1}             // force du glow
+                            luminanceThreshold={0.0}     
+                            luminanceSmoothing={.9}
+                            radius={0.4}
+                            blendFunction={BlendFunction.SCREEN}
+                        />
+                    </EffectComposer>
+                    <Particles />
+                </SceneWrapper>
             </Canvas>
+
+
 
 
             <div className="absolute w-[514px] h-[153px] right-10 top-1/4">
@@ -239,6 +241,6 @@ export default function Hero({ scrollToMerch }: { scrollToMerch: () => void }) {
                 </div>
 
             </div>
-        </div>
+        </div >
     )
 }

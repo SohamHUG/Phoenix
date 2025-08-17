@@ -7,8 +7,6 @@ import Lenis from "lenis";
 import CustomLoader from "@/components/ui/CustomLoader";
 import Navbar from "@/components/ui/NavBar";
 import Hero from "@/components/Sections/Hero";
-import { div } from "three/tsl";
-import BackgroundVid from "@/components/ui/BackgroundVid";
 import About from "@/components/Sections/About";
 import Merch from "@/components/Sections/Merch";
 import NewsLetter from "@/components/Sections/NewsLetter";
@@ -38,16 +36,7 @@ export default function Home() {
   useEffect(() => {
     if (!loaded) return;
 
-    // gsap.to(loaderRef.current, {
-    //   // y: 0,
-    //   opacity: 0,
-    //   duration: .5,
-    //   ease: "power3.out",
-    //   // delay: 1.3,
-    // });
-
     gsap.set(navRef.current, { y: -100, opacity: 0 });
-
     gsap.to(navRef.current, {
       y: 0,
       opacity: 1,
@@ -56,7 +45,7 @@ export default function Home() {
       delay: 3.1,
     });
 
-    const lenis = new Lenis({ duration: 0.5, smoothWheel: false, easing: (t) => t },);
+    const lenis = new Lenis({ duration: 0.5, smoothWheel: true, easing: (t) => t });
     lenisRef.current = lenis;
 
     const raf = (time: number) => {
@@ -75,7 +64,7 @@ export default function Home() {
       scrollTrigger: {
         trigger: stackRef.current!,
         start: "top top",
-        end: "+=" + (panels.length - 1) * window.innerHeight,
+        end: () => "+=" + (panels.length - 1) * window.innerHeight,
         scrub: true,
         pin: true,
         anticipatePin: 1,
@@ -105,17 +94,12 @@ export default function Home() {
   }, [loaded]);
 
   return (
-    <main className="w-full h-screen relative max-w-scren">
-      {/* <BackgroundVid /> */}
-
-      {/* <div className="w-full h-screen bg-[linear-gradient(252.44deg,#040301_39.56%,#FF5304_100%)]"> */}
-
+    <main className="w-full min-h-screen relative">
       {!loaded && (
         <div
           ref={loaderRef}
           className={`absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
-
           style={{
             backgroundImage: "linear-gradient(252.44deg, #040301 39.56%, #FF5304 100%), url('/img/noise_texture.png')",
             backgroundBlendMode: "overlay",
@@ -126,14 +110,14 @@ export default function Home() {
       )}
 
       {loaded && (
-        <div ref={stackRef} className="h-screen">
+        <div ref={stackRef} className="min-h-screen">
           <div ref={navRef} className="opacity-0 fixed top-0 left-0 w-full z-50">
             <Navbar activeSection={activeSection} scrollToSection={scrollToSection} />
           </div>
 
           <section
             id="home"
-            className="panel h-screen flex items-center justify-center text-white "
+            className="panel min-h-screen flex items-center justify-center text-white"
             style={{
               backgroundImage: "linear-gradient(252.44deg, #040301 39.56%, #FF5304 100%), url('/img/noise_texture.png')",
               backgroundBlendMode: "overlay",
@@ -142,22 +126,19 @@ export default function Home() {
             <Hero scrollToMerch={() => scrollToSection(2)} active={activeSection === 0} />
           </section>
 
-          {/* </div> */}
-
-          <section id="about" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+          <section id="about" className="panel min-h-screen w-full bg-[#DEDFDF] border-t border-[#ccc]">
             <About active={activeSection === 1} />
           </section>
 
-          <section id="merch" className="panel h-screen flex w-full bg-[#DEDFDF] border-t border-[#ccc]">
+          <section id="merch" className="panel min-h-screen w-full bg-[#DEDFDF] border-t border-[#ccc]">
             <Merch active={activeSection === 2} />
           </section>
 
-          <section id="newsletter" className="panel h-screen flex w-full">
+          <section id="newsletter" className="panel min-h-screen w-full">
             <NewsLetter active={activeSection === 3} />
           </section>
         </div>
       )}
     </main>
-
   );
 }

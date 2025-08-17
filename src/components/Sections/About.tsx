@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import AnimatedSVG from "../ui/AnimatedSVG";
@@ -16,7 +15,6 @@ if (typeof window !== "undefined") {
 
 export default function About({ active }: { active: boolean }) {
     const [activeId, setActiveId] = useState(1);
-    const svgRefs = useRef<(SVGSVGElement | null)[]>([]);
     const activeItem = descriptions.find((d) => d.id === activeId)!;
     const sectionRef = useRef<HTMLDivElement>(null);
     const animationRef = useRef<gsap.core.Timeline>(null);
@@ -25,7 +23,6 @@ export default function About({ active }: { active: boolean }) {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-
             const title = sectionRef.current?.querySelectorAll<HTMLElement>(".title-reveal") || [];
             const whatWeDoEl = document.querySelectorAll<HTMLElement>(".what-we-do");
             const knowMoreEl = document.querySelectorAll<HTMLElement>(".know-more");
@@ -42,7 +39,7 @@ export default function About({ active }: { active: boolean }) {
             }
 
             [...title].forEach((h1) => {
-                h1.style.display = 'block'
+                h1.style.display = "block";
             });
 
             let words: HTMLElement[] = [];
@@ -57,64 +54,55 @@ export default function About({ active }: { active: boolean }) {
                     rotation: 10,
                     duration: 0.3,
                     stagger: 0.05,
-                    ease: "power3.inOut"
-                },)
+                    ease: "power3.inOut",
+                })
                 .from(words, {
                     y: 50,
                     opacity: 0,
                     duration: 0.3,
                     stagger: 0.09,
-                    ease: "power3.out"
-                },)
+                    ease: "power3.out",
+                })
                 .fromTo(buttons,
-                    { opacity: 0, },
+                    { opacity: 0 },
                     {
                         opacity: 1,
                         duration: 0.3,
                         stagger: 0.09,
                         ease: "power3.out",
                         onStart: () => setShouldDraw(true),
-                    }, ">"
-                )
+                    }, ">")
                 .from(lines, {
                     y: 20,
                     opacity: 0,
                     duration: 0.3,
                     stagger: 0.09,
-                    ease: "power2.out"
-                },)
+                    ease: "power2.out",
+                })
                 .from(knowMoreEl, {
                     y: 20,
                     opacity: 0,
-                    zIndex: -5,
                     duration: 0.3,
                     stagger: 0.09,
-                    ease: "power2.out"
-                },)
+                    ease: "power2.out",
+                });
 
             ScrollTrigger.create({
                 trigger: sectionRef.current,
-                start: "top bottom",  // Déclenche quand le haut de la section atteint le bas de l'écran
-                end: "bottom top",    // Fin quand le bas de la section atteint le haut de l'écran
+                start: "top bottom",
+                end: "bottom top",
                 onEnter: () => {
                     if (!hasAnimated.current) {
                         animationRef.current?.play();
                         hasAnimated.current = true;
                     }
                 },
-                onEnterBack: () => {
-                    // animationRef.current?.reverse();
-                },
-                onLeave: () => {
-                    // Ne rien faire en descendant
-                },
                 onLeaveBack: () => {
-                    animationRef.current?.progress(0).pause();
+                    animationRef.current?.progress(0).pause(0);
                     hasAnimated.current = false;
                     setShouldDraw(false);
-                }
+                },
             });
-
         }, sectionRef);
 
         return () => {
@@ -124,79 +112,49 @@ export default function About({ active }: { active: boolean }) {
         };
     }, []);
 
-    // useEffect(() => {
-
-    //     if (active && !hasAnimated.current) {
-    //         animationRef.current?.play();
-    //         hasAnimated.current = true;
-    //     } 
-    // }, [active]);
-
-
-
     return (
-        <div ref={sectionRef} className="flex flex-col items-start justify-center w-full h-full mt-6 animate max-w-[1920px] mr-auto cont">
-            <div className="test-1 flex items-center w-full">
-                <p className="cont flex justify-start items-center font-geist font-semibold leading-[80%] tracking-[-0.06em] text-5xl border-[0.5px] border-[#AAAAAA] py-[65px] px-[48px] h-[230px] w-[1009px]">
-                    <span className="w-[514px] text-left">
+        <div ref={sectionRef} className="flex flex-col items-start justify-center w-full h-full mt-11">
+            <div className="flex flex-col lg:flex-row w-[97.9%] max-w-[97.9%]">
+                <p className="flex flex-col leading-[80%] tracking-[-0.06em] font-geist font-semibold text-3xl sm:text-4xl md:text-5xl border border-[#AAAAAA] p-6 md:p-12 md:py-16 flex-1 h-full">
+                    <span className="text-left">
                         <span className="title-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">WE’RE HERE TO SET THE</span>
                         <span className="title-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">WORLD ON FIRE WITH</span>
                         <span className="title-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">SOUND</span>
                     </span>
                 </p>
-                <p className="cont relative flex justify-start items-start font-inter font-medium leading-[80%] tracking-[-0.06em] text-2xl text-[#AAAAAA] border-t-[0.5px] border-r-[0.5px] border-b-[0.5px] border-[#AAAAAA] px-[52px] py-[66px] w-[858px] h-[230px]">
-                    <span className="what-we-do">
-                        [ MEET PHOENIX ]
-                    </span>
-
-                    <span className="know-more absolute bottom-[-1] right-[-1] w-[457px] h-[36px] p-2.5 bg-[#FF5304] text-white font-inter font-normal leading-[100%] tracking-[-0.04em] text-sm">
+                <p className="relative flex justify-start items-start font-inter text-[#AAAAAA] border-t border-r border-b border-[#AAAAAA] p-6 md:p-12 md:py-16 flex-1">
+                    <span className="what-we-do font-inter font-medium text-2xl leading-[80%] tracking-[-0.06em]">[ MEET PHOENIX ]</span>
+                    <span className="know-more absolute -bottom-1 right-0 w-full sm:w-[55%] text-center sm:text-left p-2.5 bg-[#FF5304] text-white text-sm">
                         KNOW MORE
                     </span>
                 </p>
             </div>
 
-            <div className="test-2">
+            <div className="flex flex-col lg:flex-row w-[97.9%] max-w-[97.9%]">
+                <div className="relative flex-1 flex items-center justify-center h-[300px] md:h-[540px] w-[48.95%]">
+                    <p className="what-we-do px-2 absolute top-2 left-2 sm:px-8 sm:top-5 sm:left-3 text-xl sm:text-2xl md:text-4xl font-semibold font-geist leading-[80%] tracking-[-0.06em]">
+                        /WHAT WE DO
+                    </p>
+                    {shouldDraw && <AnimatedSVG svg={activeItem.svg} />}
+                </div>
 
-                <div className="flex">
-
-                    <div className="relative flex-1 flex items-center justify-center w-[1009px] h-[540px]">
-                        <p className="what-we-do px-[48px] pt-5 absolute top-0 left-0 text-4xl font-semibold font-geist leading-[80%] tracking-[-0.06em]">
-                            /WHAT WE DO
-                        </p>
-
-                        {shouldDraw &&
-                            <AnimatedSVG svg={activeItem.svg} />
-                        }
-                    </div>
-
-                    <div className=" grid grid-cols-2 max-w-[858px] max-h-[540px] border-r-[0.5px] border-[#AAAAAA]">
-                        {descriptions.map((item) => (
-                            <button
-                                key={item.id}
-                                onClick={() => setActiveId(item.id)}
-                                className={`about-btn opacity-100 flex flex-col justify-between w-[430px] h-[270px] text-left border-l-[0.5px] border-b-[0.5px] p-[49px] transition-all duration-300 ${activeId === item.id
-                                    ? "border-[#FF5304] bg-[#FF5304] text-white"
-                                    : "border-[#AAAAAA] hover:bg-[#F2E4DE] hover:cursor-pointer bg-white"
-                                    }`}
-                            >
-                                <h3 className="font-normal font-inter text-2xl leading-[100%] tracking-[-0.04em] flex gap-16">
-                                    <span
-                                        className={`${activeId === item.id
-                                            ? "text-white"
-                                            : "text-[#FF5304] "
-                                            }`}
-                                    >
-                                        0{item.id}
-                                    </span>
-                                    <span className="about-text">{item.title}</span>
-                                </h3>
-                                <p className="about-text text-sm font-inter font-normal leading-[100%] tracking-[-0.04em] w-[333px]">
-                                    {item.text}
-                                </p>
-                            </button>
-
-                        ))}
-                    </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 border-l border-r border-b border-[#AAAAAA] w-[50%]">
+                    {descriptions.map((item) => (
+                        <button
+                            key={item.id}
+                            onClick={() => setActiveId(item.id)}
+                            className={`cursor-pointer about-btn flex flex-col justify-between p-4 sm:p-12 transition-all duration-300 ${activeId === item.id
+                                ? "border-[#FF5304] bg-[#FF5304] text-white"
+                                : "border-[#AAAAAA] hover:bg-[#F2E4DE] bg-white"
+                                }`}
+                        >
+                            <h3 className="font-inter font-normal text-lg sm:text-xl md:text-2xl flex gap-16 leading-[100%] tracking-[-0.04em]">
+                                <span className={activeId === item.id ? "text-white" : "text-[#FF5304]"}>0{item.id}</span>
+                                <span className="about-text">{item.title}</span>
+                            </h3>
+                            <p className="about-text text-sm md:text-base mt-2 leading-[100%] tracking-[-0.04em]">{item.text}</p>
+                        </button>
+                    ))}
                 </div>
             </div>
         </div>

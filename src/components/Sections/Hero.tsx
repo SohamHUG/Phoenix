@@ -197,6 +197,7 @@ export default function Hero({ scrollToMerch, active }: { scrollToMerch: () => v
                 <p
                     ref={titleRef}
                     className="font-geist font-semibold text-[64px] leading-[80%] tracking-[-0.06em] uppercase text-left effect-shine"
+                    
                 >
                     <span className="from-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">from ashes to</span>
                     <span className="from-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">anthem the rise</span>

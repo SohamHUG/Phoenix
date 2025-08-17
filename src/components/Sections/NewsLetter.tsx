@@ -96,13 +96,14 @@ export default function NewsLetter({ active }: { active: boolean }) {
 
     return (
         <div ref={sectionRef} className="sec flex justify-center w-full h-full min-h-screen items-center overflow-hidden">
-            <div className="w-[1824px] h-[783px] rounded-xl bg-center bg-cover mx-auto mt-10 p-5 flex flex-col justify-between"
+            <div className="w-[97%] h-[80%] rounded-xl bg-center bg-cover mx-auto mt-28 p-5 flex flex-col justify-between"
                 style={{
                     backgroundImage: "url('/img/newsletter-bg.png')",
-                    backgroundSize: "calc(1200px * (100vw / 1920)) auto",
+                    // backgroundSize: "calc(1200px * (100vw / 1920)) auto",
+                    backgroundSize: "cover",
                 }}>
 
-            <div className="bg-black/40 w-[521px] py-20 px-10 rounded-3xl flex flex-col gap-6 form-box">
+            <div className="bg-black/40 w-[30%] py-20 px-10 rounded-3xl flex flex-col gap-6 form-box">
                 <p className="font-geist font-semibold text-4xl leading-[80%] tracking-[-0.06em] text-white lines-reveal">JOIN THE PHOENIX RISING</p>
                 <p className="text-white font-inter font-normal text-xl lines-reveal">Be the first to hear new tracks, get early merch drops, and exclusive content.</p>
 
@@ -125,13 +126,13 @@ export default function NewsLetter({ active }: { active: boolean }) {
 
                 <div className="flex flex-col gap-5 w-1/3 items-end">
                     <div className="flex gap-3">
-                        <button className="font-inter font-medium text-[16px] tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
+                        <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
                             LINKEDIN
                         </button>
-                        <button className="font-inter font-medium text-[16px] tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
+                        <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
                             CONTACT US
                         </button>
-                        <button className="font-inter font-medium text-[16px] tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
+                        <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
                             INSTAGRAM
                         </button>
                     </div>

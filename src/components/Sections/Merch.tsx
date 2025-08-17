@@ -80,15 +80,16 @@ export default function Merch({ active }: { active: boolean }) {
     // console.log(active)
 
     return (
-        <div ref={sectionRef} className="w-full h-full flex flex-col items-center mt-28">
-            <div className="relative w-full max-w-[1824px]">
-                <Image
+        <div ref={sectionRef} className="w-full h-full flex flex-col items-center mt-28 max-w-[1600px] mx-auto my-auto">
+            <div className="relative w-full ">
+                {/* <Image
                     src="/img/merch/banner-merch.png"
                     alt="Banner Phoenix"
                     width={1824}
                     height={311}
                     className="w-full h-auto"
-                />
+                /> */}
+                <img src="/img/merch/banner-merch.png" alt="Banner Phoenix" className="w-full h-auto" />
 
                 <div className="absolute inset-0 flex justify-between items-center px-16">
                     <p className="font-geist font-semibold text-4xl leading-[80%] tracking-[-0.06em] text-white w-[380px] effect-shine">

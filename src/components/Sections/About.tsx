@@ -135,16 +135,16 @@ export default function About({ active }: { active: boolean }) {
 
 
     return (
-        <div ref={sectionRef} className="flex flex-col items-start justify-center w-full h-full mt-6 animate">
-            <div className="test-1 flex items-center">
-                <p className="flex justify-start items-center font-geist font-semibold leading-[80%] tracking-[-0.06em] text-5xl border-[0.5px] border-[#AAAAAA] py-[65px] px-[48px] h-[230px] w-[1009px]">
+        <div ref={sectionRef} className="flex flex-col items-start justify-center w-full h-full mt-6 animate max-w-[1920px] mr-auto cont">
+            <div className="test-1 flex items-center w-full">
+                <p className="cont flex justify-start items-center font-geist font-semibold leading-[80%] tracking-[-0.06em] text-5xl border-[0.5px] border-[#AAAAAA] py-[65px] px-[48px] h-[230px] w-[1009px]">
                     <span className="w-[514px] text-left">
                         <span className="title-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">WE’RE HERE TO SET THE</span>
                         <span className="title-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">WORLD ON FIRE WITH</span>
                         <span className="title-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">SOUND</span>
                     </span>
                 </p>
-                <p className="relative flex justify-start items-start font-inter font-medium leading-[80%] tracking-[-0.06em] text-2xl text-[#AAAAAA] border-t-[0.5px] border-r-[0.5px] border-b-[0.5px] border-[#AAAAAA] px-[52px] py-[66px] w-[858px] h-[230px]">
+                <p className="cont relative flex justify-start items-start font-inter font-medium leading-[80%] tracking-[-0.06em] text-2xl text-[#AAAAAA] border-t-[0.5px] border-r-[0.5px] border-b-[0.5px] border-[#AAAAAA] px-[52px] py-[66px] w-[858px] h-[230px]">
                     <span className="what-we-do">
                         [ MEET PHOENIX ]
                     </span>

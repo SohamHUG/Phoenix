@@ -135,6 +135,10 @@ body {
   overflow-x: hidden;
 }
 
+.cont {
+  width: calc(1200px * (100vw / 1920));
+}
+
 html,
 body {
   font-size: calc(10px * (100vw / 1920));

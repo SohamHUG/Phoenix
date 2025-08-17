@@ -140,7 +140,7 @@ export default function Hero({ scrollToMerch, active }: { scrollToMerch: () => v
 
 
     return (
-        <div className="relative w-full h-screen flex justify-center items-center ">
+        <div className="relative w-full h-screen flex justify-center items-center">
             {/* {active && ()} */}
 
             <Canvas

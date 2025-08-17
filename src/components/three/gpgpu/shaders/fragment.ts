@@ -37,7 +37,9 @@ void main() {
 // gl_FragColor = vec4(242.0/255.0, 242.0/255.0, 242.0/255.0, velocityAlpha);
 
 // gold #efbf04
-gl_FragColor = vec4(239.0/255.0, 191.0/255.0, 4.0/255.0, velocityAlpha);
+// gl_FragColor = vec4(239.0/255.0, 191.0/255.0, 4.0/255.0, velocityAlpha);
+
+gl_FragColor = vec4(248.0/255.0, 129.0/255.0, 17.0/255.0, velocityAlpha);
 
 }
 	`;

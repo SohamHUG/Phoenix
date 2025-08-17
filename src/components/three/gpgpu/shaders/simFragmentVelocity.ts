@@ -33,7 +33,7 @@ void main() {
 
 	if( mouseDistance < maxDistance ) {
 		vec3 pushDirection = normalize( position - uMouse );
-		velocity += pushDirection * ( 1.0 - mouseDistance / maxDistance ) * 0.04 * uMouseSpeed;
+		velocity += pushDirection * ( 1.0 - mouseDistance / maxDistance ) * 0.13 * uMouseSpeed;
 	}
 
 

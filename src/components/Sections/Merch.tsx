@@ -56,7 +56,7 @@ export default function Merch({ active }: { active: boolean }) {
     }, [active]);
 
     return (
-        <div ref={sectionRef} className="w-full min-h-screen flex flex-col items-center justify-center mt-24 max-w-[95.8%] mx-auto">
+        <div ref={sectionRef} className="w-full min-h-screen flex flex-col items-center justify-center mt-14 max-w-[95.8%] mx-auto">
             <div className=" w-full">
                 {/* <img src="/img/merch/banner-merch.png" alt="Banner Phoenix" className="w-full h-auto" /> */}
                 <div
@@ -84,9 +84,9 @@ export default function Merch({ active }: { active: boolean }) {
                             alt={product.name}
                             width={300}
                             height={498}
-                            className="w-auto h-auto object-cover transition-transform duration-500 group-hover:scale-75 group-hover:-translate-y-30"
+                            className="w-auto h-auto object-cover transition-transform duration-500 group-hover:scale-75 group-hover:-translate-y-20"
                         />
-                        <div className="absolute bottom-0 left-0 w-full h-[14.5rem] bg-white/90 p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex flex-col justify-center gap-2.5">
+                        <div className="absolute bottom-10 left-0 w-full h-[10rem] opacity-0 bg-white/90 rounded p-3 transform translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 flex flex-col justify-center gap-2.5">
                             <h3 className="font-inter font-normal text-lg sm:text-xl md:text-4xl">{product.name}</h3>
                             <p className="text-xs bg-[#E9E7DE] w-fit px-2 py-1 font-inter gap-2.5">
                                 <Image src="/img/star.png" alt="star" width={10} height={10} className="inline-block mr-1" />

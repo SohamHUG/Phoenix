@@ -152,7 +152,7 @@ export default function About({ active }: { active: boolean }) {
                                 <span className={activeId === item.id ? "text-white" : "text-[#FF5304]"}>0{item.id}</span>
                                 <span className="about-text">{item.title}</span>
                             </h3>
-                            <p className="about-text text-sm md:text-base mt-2 leading-[100%] tracking-[-0.04em]">{item.text}</p>
+                            <p className="about-text text-left text-sm md:text-base mt-2 leading-[100%] tracking-[-0.04em]">{item.text}</p>
                         </button>
                     ))}
                 </div>

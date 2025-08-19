@@ -78,7 +78,7 @@ export default function Merch({ active }: { active: boolean }) {
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full">
                 {products.map((product, idx) => (
-                    <div key={idx} className="relative overflow-hidden group products">
+                    <div key={idx} className="relative overflow-hidden group products flex flex-col justify-center">
                         <Image
                             src={product.image}
                             alt={product.name}

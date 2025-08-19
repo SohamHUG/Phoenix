@@ -218,7 +218,7 @@ export default function About({ active }: { active: boolean }) {
                 </p>
                 <p className="relative flex justify-start items-start font-inter text-[#AAAAAA] border-t border-r border-b border-[#AAAAAA] p-6 md:p-12 md:py-16 flex-1">
                     <span className="what-we-do font-inter font-medium text-2xl leading-[80%] tracking-[-0.06em]">[ MEET PHOENIX ]</span>
-                    <span className="know-more absolute -bottom-1 right-0 w-full sm:w-[55%] text-center sm:text-left p-2.5 bg-[#FF5304] text-white text-sm">
+                    <span className="know-more absolute bottom-0 right-0 w-full sm:w-[55%] text-center sm:text-left p-2.5 bg-[#FF5304] text-white text-sm">
                         KNOW MORE
                     </span>
                 </p>

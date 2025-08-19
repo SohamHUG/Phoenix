@@ -123,34 +123,32 @@ export default function NewsLetter({ active }: { active: boolean }) {
                     // backgroundSize: "cover",
                 }}>
 
-                <div className="flex w-full h-[65%] gap-2">
-                    {/* image center */}
-                    <div className="flex-1 overflow-hidden order-2 transition-all duration-500 hover:flex-[3] group">
-                        <img
-                            src="/img/newsletter-bg.png"
-                            alt="female singer"
-                            className="w-full min-h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                        />
-                    </div>
-
-                    {/* image left */}
-                    <div className="flex-1 overflow-hidden order-1 transition-all duration-500 hover:flex-[3] group">
+                <div className="flex w-full h-[65%] gap-2 group">
+                    <div className="flex-1 overflow-hidden transition-all duration-500 hover:flex-[3]">
                         <img
                             src="/img/singer-left.png"
                             alt="singer left"
-                            className="w-full min-h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            className="w-full min-h-full object-cover transition-all duration-500 group-hover:grayscale hover:grayscale-0"
+                        />
+                    </div>
+                    
+                    <div className="flex-1 overflow-hidden transition-all duration-500 hover:flex-[3]">
+                        <img
+                            src="/img/newsletter-bg.png"
+                            alt="female singer"
+                            className="w-full min-h-full object-cover transition-all duration-500 group-hover:grayscale hover:grayscale-0"
                         />
                     </div>
 
-                    {/* image right */}
-                    <div className="flex-1 overflow-hidden order-3 transition-all duration-500 hover:flex-[3] group">
+                    <div className="flex-1 overflow-hidden transition-all duration-500 hover:flex-[3]">
                         <img
                             src="/img/singer-right.png"
                             alt="singer right"
-                            className="w-full min-h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            className="w-full min-h-full object-cover transition-all duration-500 group-hover:grayscale hover:grayscale-0"
                         />
                     </div>
                 </div>
+
 
                 <div className="bg-[#C6C6C6] flex justify-between p-8 mb-3">
                     <div className="form-box w-[35%] flex flex-col gap-5">

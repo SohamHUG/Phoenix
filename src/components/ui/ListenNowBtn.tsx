@@ -11,59 +11,65 @@ export default function ListenNowButton({ isHomeSection }: { isHomeSection: bool
     const dotsButtonRef = useRef<HTMLButtonElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
 
+    const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
+
     const handleMouseEnter = () => {
-        setIsExpanded(true);
+        hoverTimeout.current = setTimeout(() => {
+            setIsExpanded(true);
 
-        gsap.to(mainButtonRef.current, {
-            width: 160,
-            duration: 0.2,
-            // delay: 0.1,
-            ease: "power2.out",
-            onUpdate: () => {
-                if (mainButtonRef.current) {
-                    mainButtonRef.current.style.justifyContent = 'center';
-                }
-            }
-        });
+            gsap.to(mainButtonRef.current, {
+                width: 160,
+                duration: 0.2,
+                ease: "power2.out",
+            });
 
-        gsap.to(dotsButtonRef.current, {
-            opacity: 0,
-            duration: 0.1,
-            // display: 'none',
-            
-            onComplete: () => {
-                if (dotsButtonRef.current) dotsButtonRef.current.style.display = 'none';
-            }
-        });
+            gsap.to(dotsButtonRef.current, {
+                opacity: 0,
+                duration: 0.1,
+                onComplete: () => {
+                    if (dotsButtonRef.current) dotsButtonRef.current.style.display = "none";
+                },
+            });
 
-        gsap.fromTo(menuRef.current,
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.5, }
-        );
+            gsap.fromTo(
+                menuRef.current,
+                { opacity: 0, y: -10 },
+                { opacity: 1, y: 0, duration: 0.5 }
+            );
+        }, 150);
     };
 
     const handleMouseLeave = () => {
+        // 🔹 empêche ouverture si pas encore déclenché
+        if (hoverTimeout.current) {
+            clearTimeout(hoverTimeout.current);
+            hoverTimeout.current = null;
+        }
+
+        // 🔹 kill les anims en cours
+        gsap.killTweensOf([mainButtonRef.current, dotsButtonRef.current, menuRef.current]);
+
         setIsExpanded(false);
 
         gsap.to(mainButtonRef.current, {
-            width: 120, 
+            width: 120,
             duration: 0.2,
-            ease: "power2.out"
+            ease: "power2.out",
         });
 
-        if (dotsButtonRef.current) dotsButtonRef.current.style.display = 'flex';
+        if (dotsButtonRef.current) dotsButtonRef.current.style.display = "flex";
         gsap.to(dotsButtonRef.current, {
             opacity: 1,
             duration: 0.2,
-            // delay: 0.1
         });
 
         gsap.to(menuRef.current, {
             opacity: 0,
             y: -10,
-            duration: 0.02
+            duration: 0.1,
         });
     };
+
 
     return (
         <div

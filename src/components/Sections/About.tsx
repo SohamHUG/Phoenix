@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import DrawSVGPlugin from "gsap/DrawSVGPlugin";
 import AnimatedSVG from "../ui/AnimatedSVG";
@@ -28,24 +28,36 @@ export default function About({ active }: { active: boolean }) {
             const knowMoreEl = document.querySelectorAll<HTMLElement>(".know-more");
             const buttons = sectionRef.current?.querySelectorAll<HTMLElement>(".about-btn") || [];
             const letters = new SplitText(title).chars;
-            const texts = sectionRef.current?.querySelectorAll<HTMLElement>(".about-text") || [];
-            let lines: HTMLElement[] = [];
 
-            if (texts.length) {
-                texts.forEach((text) => {
-                    const split = new SplitText(text, { type: "lines" });
-                    lines.push(...(split.lines as HTMLElement[]));
-                });
-            }
-
-            [...title].forEach((h1) => {
-                h1.style.display = "block";
-            });
+            [...title].forEach((h1) => (h1.style.display = "block"));
 
             let words: HTMLElement[] = [];
             if (whatWeDoEl) {
                 const splitWords = new SplitText(whatWeDoEl, { type: "words" });
                 words = splitWords.words as HTMLElement[];
+            }
+
+            const activeText = sectionRef.current?.querySelectorAll<HTMLElement>(
+                `.about-btn[data-id="${activeId}"] .about-text`
+            ) || [];
+            let lines: HTMLElement[] = [];
+
+            if (activeText.length) {
+                activeText.forEach((text) => {
+                    const split = new SplitText(text, { type: "lines" });
+                    lines.push(...(split.lines as HTMLElement[]));
+                });
+            }
+
+            const aboutTitle = sectionRef.current?.querySelectorAll<HTMLElement>(".about-title");
+
+            let lines2: HTMLElement[] = [];
+
+            if (aboutTitle) {
+                aboutTitle.forEach((title) => {
+                    const split = new SplitText(title, { type: "lines" });
+                    lines2.push(...(split.lines as HTMLElement[]));
+                });
             }
 
             animationRef.current = gsap.timeline({ paused: true })
@@ -72,6 +84,14 @@ export default function About({ active }: { active: boolean }) {
                         ease: "power3.out",
                         onStart: () => setShouldDraw(true),
                     }, ">")
+
+                .from(lines2, {
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.3,
+                    stagger: 0.09,
+                    ease: "power2.out",
+                })
                 .from(lines, {
                     y: 20,
                     opacity: 0,
@@ -112,6 +132,80 @@ export default function About({ active }: { active: boolean }) {
         };
     }, []);
 
+
+    useEffect(() => {
+        const allTexts = sectionRef.current?.querySelectorAll<HTMLElement>(".about-text") || [];
+        const activeText = sectionRef.current?.querySelector<HTMLElement>(
+            `.about-btn[data-id="${activeId}"] .about-text`
+        );
+        const aboutTitles = sectionRef.current?.querySelectorAll<HTMLElement>(".about-title-parent") || [];
+        const activeTitle = sectionRef.current?.querySelector<HTMLElement>(
+            `.about-btn[data-id="${activeId}"] .about-title-parent`
+        );
+
+        allTexts.forEach((text) => {
+            if (text !== activeText) {
+                gsap.to(text, {
+                    opacity: 0,
+                    height: 0,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            }
+        });
+
+        aboutTitles.forEach((title) => {
+            if (title !== activeTitle) {
+                gsap.to(title, {
+                    yPercent:200,
+                    duration: 0.4,
+                    ease: "power2.inOut"
+                });
+            }
+        });
+
+        if (activeTitle) {
+            gsap.to(activeTitle, {
+                yPercent: 0,
+                duration: 0.4,
+                ease: "power2.inOut"
+            });
+        }
+
+
+        if (activeText) {
+            const split = new SplitText(activeText, { type: "lines" });
+            const lines = split.lines as HTMLElement[];
+
+            const finalHeight = activeText.scrollHeight;
+
+            gsap.fromTo(
+                activeText,
+                { height: 0 },
+                {
+                    height: finalHeight,
+                    duration: 0.4,
+                    ease: "power2.inOut",
+                }
+            );
+
+            gsap.fromTo(
+                lines,
+                { y: 20, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.4,
+                    stagger: 0.08,
+                    ease: "power2.out"
+                }
+            );
+        }
+    }, [activeId]);
+
+
+
+
     return (
         <div ref={sectionRef} className="flex flex-col items-start justify-center w-full h-full mt-11">
             <div className="flex flex-col lg:flex-row w-[97.9%] max-w-[97.9%]">
@@ -138,21 +232,27 @@ export default function About({ active }: { active: boolean }) {
                     {shouldDraw && <AnimatedSVG svg={activeItem.svg} />}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 border-l border-r border-b border-[#AAAAAA] w-[50%]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 border-l border-r border-b border-[#AAAAAA] w-[50%] h-full">
                     {descriptions.map((item) => (
                         <button
                             key={item.id}
+                            data-id={item.id}
                             onClick={() => setActiveId(item.id)}
-                            className={`cursor-pointer about-btn flex flex-col justify-between p-4 sm:p-12 transition-all duration-300 ${activeId === item.id
+                            className={`cursor-pointer about-btn flex flex-col p-4 sm:p-9 transition-all duration-300 h-[18rem] justify-around ${activeId === item.id
                                 ? "border-[#FF5304] bg-[#FF5304] text-white"
                                 : "border-[#AAAAAA] hover:bg-[#F2E4DE] bg-white"
                                 }`}
                         >
-                            <h3 className="font-inter font-normal text-lg sm:text-xl md:text-2xl flex gap-16 leading-[100%] tracking-[-0.04em]">
-                                <span className={activeId === item.id ? "text-white" : "text-[#FF5304]"}>0{item.id}</span>
-                                <span className="about-text">{item.title}</span>
+                            <h3 className="about-title-parent font-inter font-normal text-lg sm:text-xl md:text-2xl flex gap-16 leading-[100%] tracking-[-0.04em]">
+                                <span className={`about-title ${activeId === item.id ? "text-white" : "text-[#FF5304]"}`}>0{item.id}</span>
+                                <span className="about-title transition-all duration-200">{item.title}</span>
                             </h3>
-                            <p className="about-text text-left text-sm md:text-base mt-2 leading-[100%] tracking-[-0.04em]">{item.text}</p>
+                            <p
+                                className="about-text text-left text-sm md:text-base mt-2 leading-[100%] tracking-[-0.04em] overflow-hidden"
+                                style={{ opacity: activeId === item.id ? 1 : 0 }}
+                            >
+                                {item.text}
+                            </p>
                         </button>
                     ))}
                 </div>

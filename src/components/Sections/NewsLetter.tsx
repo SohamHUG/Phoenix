@@ -105,29 +105,29 @@ export default function NewsLetter({ active }: { active: boolean }) {
 
                 <div className="flex w-full h-[65%] gap-2">
                     {/* image center */}
-                    <div className="flex-[3] overflow-hidden order-2 transition-all duration-500 peer group hover:flex-[10]">
+                    <div className="flex-1 overflow-hidden order-2 transition-all duration-500 hover:flex-[3] group">
                         <img
                             src="/img/newsletter-bg.png"
                             alt="female singer"
-                            className="w-full min-h-full object-cover group-hover:object-center"
+                            className="w-full min-h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         />
                     </div>
 
                     {/* image left */}
-                    <div className="flex-1 overflow-hidden order-1 transition-all duration-500 peer-hover:flex-[0] peer-hover:opacity-0">
+                    <div className="flex-1 overflow-hidden order-1 transition-all duration-500 hover:flex-[3] group">
                         <img
                             src="/img/singer-left.png"
                             alt="singer left"
-                            className="w-full min-h-full object-cover grayscale"
+                            className="w-full min-h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         />
                     </div>
 
                     {/* image right */}
-                    <div className="flex-1 overflow-hidden order-3 transition-all duration-500 peer-hover:flex-[0] peer-hover:opacity-0">
+                    <div className="flex-1 overflow-hidden order-3 transition-all duration-500 hover:flex-[3] group">
                         <img
                             src="/img/singer-right.png"
                             alt="singer right"
-                            className="w-full min-h-full object-cover grayscale"
+                            className="w-full min-h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         />
                     </div>
                 </div>

@@ -19,12 +19,15 @@ type PhxProps = {
 
 export default function Phx({
     rotation = [Math.PI / 2, 0, 0],
-    size = 512,
+    size = 800,
 }: PhxProps) {
     const pointsRef = useRef<THREE.Points | null>(null);
     const gpgpuRef = useRef<any>(null);
     const { camera, gl, scene } = useThree();
     const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+    const is4K = window.innerWidth > 2000;
+    const sizeParticle = is4K ? 5.0 : 2.0;
 
     const { nodes } = useGLTF("/phx_project.glb") as unknown as {
         nodes: { Curve002: THREE.Mesh };
@@ -53,7 +56,7 @@ export default function Phx({
     useEffect(() => {
         if (!nodes?.Curve002) return;
 
-        
+
         const model = nodes.Curve002;
         const rotatedGeom = model.geometry.clone();
         rotatedGeom.rotateX(Math.PI / 2);
@@ -88,7 +91,7 @@ export default function Phx({
                 uPositionTexture: { value: posRT },
                 uVelocityTexture: { value: velRT },
                 uResolution: { value: new THREE.Vector2(size, size) },
-                uParticleSize: { value: 2.0 },
+                uParticleSize: { value: sizeParticle },
                 // uOpacity: { value: 0 },
             },
             vertexShader: VERTEX_SHADER,
@@ -110,7 +113,7 @@ export default function Phx({
         pointsRef.current = points;
         scene.add(points);
 
-        points.rotation.set(Math.PI / 4, 0, 0) // ou une rotation plus exagérée
+        points.rotation.set(Math.PI / 5, 0, 0) // ou une rotation plus exagérée
         points.scale.set(0.5, 0.5, 0.5)
 
         // anim gsap

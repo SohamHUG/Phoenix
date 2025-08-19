@@ -16,7 +16,7 @@ export default function Navbar({ activeSection, scrollToSection }: { activeSecti
 
 
     useEffect(() => {
-        const newIsHome = activeSection === 0 || activeSection === 3;
+        const newIsHome = activeSection === 0;
 
         if (newIsHome !== isHomeSection) {
             setIsHomeSection(newIsHome);
@@ -56,8 +56,9 @@ export default function Navbar({ activeSection, scrollToSection }: { activeSecti
                     alt="Logo"
                     width={188}
                     height={69}
-                    className="absolute"
+                    className="absolute cursor-pointer"
                     style={{ opacity: isHomeSection ? 1 : 0 }}
+                    onClick={() => scrollToSection(0)}
                 />
                 <Image
                     ref={logoDarkRef}
@@ -65,8 +66,9 @@ export default function Navbar({ activeSection, scrollToSection }: { activeSecti
                     alt="Logo"
                     width={188}
                     height={69}
-                    className="absolute"
+                    className="absolute cursor-pointer"
                     style={{ opacity: isHomeSection ? 0 : 1 }}
+                    onClick={() => scrollToSection(0)}
                 />
             </div>
 

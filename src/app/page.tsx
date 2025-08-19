@@ -134,7 +134,7 @@ export default function Home() {
             <Merch active={activeSection === 2} />
           </section>
 
-          <section id="newsletter" className="panel min-h-screen w-full">
+          <section id="newsletter" className="panel min-h-screen w-full bg-[#DEDFDF]">
             <NewsLetter active={activeSection === 3} />
           </section>
         </div>

@@ -41,10 +41,10 @@ export default function NewsLetter({ active }: { active: boolean }) {
                 paused: true,
                 reversed: true
             })
-                .to(section, {
-                    background: "linear-gradient(252.44deg, #060200 0%, #FF5304 100%)",
-                    duration: 1.4,
-                })
+                // .to(section, {
+                //     background: "linear-gradient(252.44deg, #060200 0%, #FF5304 100%)",
+                //     duration: 1.4,
+                // })
                 .from(formBox, {
                     y: 20,
                     opacity: 0,
@@ -95,54 +95,81 @@ export default function NewsLetter({ active }: { active: boolean }) {
 
 
     return (
-        <div ref={sectionRef} className="sec flex justify-center w-full h-full min-h-screen items-center overflow-hidden">
-            <div className="w-[97%] h-[80%] rounded-xl bg-center bg-cover mx-auto mt-28 p-5 flex flex-col justify-between"
+        <div ref={sectionRef} className="sec flex items-end w-full h-full min-h-screen overflow-hidden">
+            <div className="w-[95.8%] h-full mx-auto flex flex-col gap-5 justify-end"
                 style={{
-                    backgroundImage: "url('/img/newsletter-bg.png')",
+                    // backgroundImage: "url('/img/newsletter-bg.png')",
                     // backgroundSize: "calc(1200px * (100vw / 1920)) auto",
-                    backgroundSize: "cover",
+                    // backgroundSize: "cover",
                 }}>
 
-            <div className="bg-black/40 w-[30%] py-20 px-10 rounded-3xl flex flex-col gap-6 form-box">
-                <p className="font-geist font-semibold text-4xl leading-[80%] tracking-[-0.06em] text-white lines-reveal">JOIN THE PHOENIX RISING</p>
-                <p className="text-white font-inter font-normal text-xl lines-reveal">Be the first to hear new tracks, get early merch drops, and exclusive content.</p>
-
-                <span className="lines-reveal w-full">
-                    <input type="email" placeholder="Enter your email" className="w-full border-b border-white placeholder:text-white placeholder:font-inter placeholder:font-normal placeholder:text-xl" />
-                </span>
-
-                <div className="lines-reveal w-full flex justify-end">
-                    <button className="py-2 px-3 bg-white rounded-4xl hover:cursor-pointer hover:bg-black/5 hover:text-white transition-all duration-300 font-inter font-normal tracking-[-0.02em] text-xl">Submit</button>
-                </div>
-            </div>
-
-            <div className="flex justify-between items-end w-full">
-
-                <div className="w-1/3"></div>
-
-                <p className="font-inter font-light text-sm text-white w-1/3 credits text-center">
-                    Copyright: “© 2025 Phoenix / B-WEEK Entertainment. All Rights Reserved.”
-                </p>
-
-                <div className="flex flex-col gap-5 w-1/3 items-end">
-                    <div className="flex gap-3">
-                        <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
-                            LINKEDIN
-                        </button>
-                        <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
-                            CONTACT US
-                        </button>
-                        <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-white p-6 bg-[#E8E7DE05] rounded-[8px] transition-all duration-300 hover:bg-white hover:text-black hover:cursor-pointer socials-btn">
-                            INSTAGRAM
-                        </button>
+                <div className="flex w-full h-[65%] gap-2">
+                    {/* image center */}
+                    <div className="flex-[3] overflow-hidden order-2 transition-all duration-500 peer group hover:flex-[10]">
+                        <img
+                            src="/img/newsletter-bg.png"
+                            alt="female singer"
+                            className="w-full min-h-full object-cover group-hover:object-center"
+                        />
                     </div>
-                    <p className="text-white font-light font-inter tracking-[-0.04em] text-xs credits">Design By Gaurav Mali | Developed By Soham HUGUENIN</p>
+
+                    {/* image left */}
+                    <div className="flex-1 overflow-hidden order-1 transition-all duration-500 peer-hover:flex-[0] peer-hover:opacity-0">
+                        <img
+                            src="/img/singer-left.png"
+                            alt="singer left"
+                            className="w-full min-h-full object-cover grayscale"
+                        />
+                    </div>
+
+                    {/* image right */}
+                    <div className="flex-1 overflow-hidden order-3 transition-all duration-500 peer-hover:flex-[0] peer-hover:opacity-0">
+                        <img
+                            src="/img/singer-right.png"
+                            alt="singer right"
+                            className="w-full min-h-full object-cover grayscale"
+                        />
+                    </div>
                 </div>
+
+                <div className="bg-[#C6C6C6] flex justify-between p-8 mb-3">
+                    <div className="form-box w-[35%] flex flex-col gap-5">
+                        <p className="font-geist font-semibold text-2xl leading-[80%] tracking-[-0.06em] lines-reveal text-[#2F2F2F]">
+                            JOIN THE PHOENIX RISING
+                        </p>
+                        <p className="font-inter font-normal text-sm lines-reveal w-[70%] text-[#2F2F2F]">
+                            Be the first to hear new tracks, get early merch drops, and exclusive content.
+                        </p>
+
+                        <div className=" w-full flex items-end lines-reveal">
+                            <input
+                                type="email"
+                                placeholder="Enter your email"
+                                className="w-[55%] py-2 border-b placeholder:text-[#2F2F2F] border-[#2F2F2F] placeholder:font-inter placeholder:font-normal placeholder:text-sm"
+                            />
+                            <button className="py-2 px-3 bg-[#2F2F2F] text-white hover:cursor-pointer hover:bg-white hover:text-[#2F2F2F] transition-all duration-300 font-inter font-normal tracking-[-0.02em] text-sm">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col justify-around items-end">
+                        <div className="flex gap-3">
+                            <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-[#2F2F2F] p-6 bg-[#00000005] rounded-[8px] transition-all duration-300 hover:bg-[#2F2F2F] hover:text-white hover:cursor-pointer socials-btn">
+                                LINKEDIN
+                            </button>
+                            <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-[#2F2F2F] p-6 bg-[#00000005] rounded-[8px] transition-all duration-300 hover:bg-[#2F2F2F] hover:text-white hover:cursor-pointer socials-btn">
+                                CONTACT US
+                            </button>
+                            <button className="font-inter font-medium text-sm sm:text-base md:text-lg tracking-[-0.06em] text-[#2F2F2F] p-6 bg-[#00000005] rounded-[8px] transition-all duration-300 hover:bg-[#2F2F2F] hover:text-white hover:cursor-pointer socials-btn">
+                                INSTAGRAM
+                            </button>
+                        </div>
+                        <p className="text-[#2F2F2F] font-light font-inter tracking-[-0.04em] text-xs credits">Design By Gaurav Mali | Developed By Soham HUGUENIN</p>
+                    </div>
+                </div>
+
             </div>
-
-
-
-        </div>
         </div >
     );
 }

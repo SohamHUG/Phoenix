@@ -173,8 +173,6 @@ export default function Hero({ scrollToMerch, active }: { scrollToMerch: () => v
                         color="#ffc362"
                         castShadow
                     />
-                    {/* <EnvironmentMap preset="city" /> */}
-
                     <Phx />
 
                     <EffectComposer multisampling={0}>

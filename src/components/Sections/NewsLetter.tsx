@@ -11,6 +11,7 @@ export default function NewsLetter({ active }: { active: boolean }) {
     const sectionRef = useRef<HTMLDivElement>(null);
     const animationRef = useRef<gsap.core.Timeline>(null);
     const hasAnimated = useRef(false);
+    const lineRef = useRef<HTMLDivElement>(null);
 
 
     useLayoutEffect(() => {
@@ -19,10 +20,22 @@ export default function NewsLetter({ active }: { active: boolean }) {
             const section = sectionRef.current;
 
             gsap.set(section, { backgroundColor: "#DEDFDF" });
+            gsap.set(lineRef.current, { y: 100, opacity: 0 });
+
+            gsap.to(lineRef.current, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out",
+                delay: 3.1,
+            });
 
 
             const texts = sectionRef.current?.querySelectorAll<HTMLElement>(".lines-reveal") || [];
             let lines: HTMLElement[] = [];
+
+            const formElements = sectionRef.current?.querySelectorAll<HTMLElement>(".form-elt") || [];
+
 
             if (texts.length) {
                 texts.forEach((text) => {
@@ -55,6 +68,13 @@ export default function NewsLetter({ active }: { active: boolean }) {
                     opacity: 0,
                     duration: 0.3,
                     stagger: 0.09,
+                    ease: "power2.out"
+                }, ">")
+                .from(formElements, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.4,
+                    stagger: 0.1,
                     ease: "power2.out"
                 }, ">")
                 .fromTo(socialsBtn, {
@@ -141,16 +161,16 @@ export default function NewsLetter({ active }: { active: boolean }) {
                             Be the first to hear new tracks, get early merch drops, and exclusive content.
                         </p>
 
-                        <div className=" w-full flex items-end lines-reveal">
+                        <span className="w-full flex items-end form-elt">
                             <input
                                 type="email"
                                 placeholder="Enter your email"
-                                className="w-[55%] py-2 border-b placeholder:text-[#2F2F2F] border-[#2F2F2F] placeholder:font-inter placeholder:font-normal placeholder:text-sm"
+                                className="w-[60%] py-2 border-b placeholder:text-[#2F2F2F] border-[#2F2F2F] placeholder:font-inter placeholder:font-normal placeholder:text-sm"
                             />
                             <button className="py-2 px-3 bg-[#2F2F2F] text-white hover:cursor-pointer hover:bg-white hover:text-[#2F2F2F] transition-all duration-300 font-inter font-normal tracking-[-0.02em] text-sm">
                                 Submit
                             </button>
-                        </div>
+                        </span>
                     </div>
 
                     <div className="flex flex-col justify-around items-end">

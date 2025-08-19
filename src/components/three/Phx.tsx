@@ -19,7 +19,7 @@ type PhxProps = {
 
 export default function Phx({
     rotation = [Math.PI / 2, 0, 0],
-    size = 1200,
+    size = 512,
 }: PhxProps) {
     const pointsRef = useRef<THREE.Points | null>(null);
     const gpgpuRef = useRef<any>(null);
@@ -53,6 +53,7 @@ export default function Phx({
     useEffect(() => {
         if (!nodes?.Curve002) return;
 
+        
         const model = nodes.Curve002;
         const rotatedGeom = model.geometry.clone();
         rotatedGeom.rotateX(Math.PI / 2);
@@ -109,7 +110,7 @@ export default function Phx({
         pointsRef.current = points;
         scene.add(points);
 
-        points.rotation.set(Math.PI / 2, 0, 0) // ou une rotation plus exagérée
+        points.rotation.set(Math.PI / 4, 0, 0) // ou une rotation plus exagérée
         points.scale.set(0.5, 0.5, 0.5)
 
         // anim gsap
@@ -144,12 +145,23 @@ export default function Phx({
         };
     }, [nodes, camera, gl, scene, size]);
 
+
+    let lastTime = 0;
+
     useFrame((state) => {
         const g = gpgpuRef.current;
         if (!g) return;
 
         const t = state.clock.getElapsedTime();
-        g.compute(t);
+
+
+
+        const now = state.clock.elapsedTime;
+        if (now - lastTime < 1 / 60) return; // 60 FPS max
+        lastTime = now;
+
+        g.compute(now);
+        // g.compute(t);
 
         if (g.events) g.events.update();
 
@@ -170,6 +182,8 @@ export default function Phx({
             points.rotation.y += (targetRotationZ - points.rotation.y) * 0.1;
         }
     });
+
+
 
     return null;
 }

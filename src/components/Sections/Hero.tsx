@@ -46,6 +46,8 @@ export default function Hero({ scrollToMerch, active }: { scrollToMerch: () => v
     const scrollRef = useRef<HTMLParagraphElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
 
+    const isMobile = window.innerWidth < 768;
+    const size = isMobile ? 256 : 550;
 
     useEffect(() => {
 
@@ -173,14 +175,14 @@ export default function Hero({ scrollToMerch, active }: { scrollToMerch: () => v
                         color="#ffc362"
                         castShadow
                     />
-                    <Phx />
+                    <Phx size={size} />
 
                     <EffectComposer multisampling={0}>
                         <Bloom
                             intensity={1}             // force du glow
-                            luminanceThreshold={0.0}     
-                            luminanceSmoothing={.9}
-                            radius={0.5}
+                            luminanceThreshold={0.2}
+                            luminanceSmoothing={.6}
+                            radius={0.3}
                             blendFunction={BlendFunction.SCREEN}
                         />
                     </EffectComposer>
@@ -195,7 +197,7 @@ export default function Hero({ scrollToMerch, active }: { scrollToMerch: () => v
                 <p
                     ref={titleRef}
                     className="font-geist font-semibold text-[64px] leading-[80%] tracking-[-0.06em] uppercase text-left effect-shine"
-                    
+
                 >
                     <span className="from-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">from ashes to</span>
                     <span className="from-reveal [clip-path:inset(0px_0px_0px_0px)] hidden">anthem the rise</span>

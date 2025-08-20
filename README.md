@@ -51,7 +51,7 @@ This project illustrates the creativity and speed of execution highlighted by th
 ---
 
 🚀 You can visit the live project here: [**Phoenix Website**](https://phoenix-botw.vercel.app/)  
-🖌️ Design by Gaurav : [**Figma**](https://www.figma.com/design/SKvHMot51iFDwKtRcjmCnn/BOTW-Dj?node-id=812-38&t=rjZLlTRUkUwYqwdi-0)  
+🖌️ Design by Gaurav : [**Figma**](https://www.figma.com/design/SKvHMot51iFDwKtRcjmCnn/BOTW-Dj?node-id=812-20&p=f&t=dKBUFa84xcf5wQtH-0)  
 💻 Source code: [**GitHub Repo**](https://github.com/SohamHUG/Phoenix/tree/main/src)  
 🎨 Designer: [**Portfolio**](https://dj-mali-boy.vercel.app/), [**GitHub**](https://github.com/HaribolGM) or [**LinkedIn**](https://www.linkedin.com/in/gauravmalii/)  
 

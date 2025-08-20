@@ -1,13 +1,17 @@
-# <font color='#f38415'>🎵 B-WEEK Entertainment Phoenix <img src="/logo.svg" alt="Logo Phoenix" width="60" />
-</font>
+<h1 align="left">
+  <img src="public/logo-phx.svg" alt="Logo Phoenix" width="50" style="vertical-align: middle; margin-right: 10px;" />
+  <span style="color:#f38415;">B-WEEK Entertainment - Phoenix</span>
+</h1>
 
 <a href="https://briefweek.fr/brief/bweek-entertainment" target="_blank">
     🔗 Link to the brief
 </a>
 
+***Brief from August 9, 2025.*** 
+
 ## <font color='#ff9072'>🔍 Context</font>
 
-***Brief from August 9, 2025.***  
+ 
 The label **B-WEEK Entertainment** is launching its *[artist/band]* named **"Phoenix"**. They have just signed and want to create a landing page to present their world, their music, and the first single they have released.
 
 ## <font color='#ff9072'>🎤 Art Direction</font>
@@ -52,5 +56,6 @@ This project illustrates the creativity and speed of execution highlighted by th
 🎨 Designer: [**Portfolio**](https://dj-mali-boy.vercel.app/), [**GitHub**](https://github.com/HaribolGM) or [**LinkedIn**](https://www.linkedin.com/in/gauravmalii/)  
 
 ---
-
-<img src="/logo.svg" alt="Logo Phoenix" width="120" />
+<p style="text-align: center; margin-top: 35px;">
+  <img src="public/logo.svg" alt="Logo Phoenix" width="480" />
+</p>

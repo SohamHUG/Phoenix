@@ -1,5 +1,5 @@
-<h1 align="left">
-  <img src="public/logo-phx.svg" alt="Logo Phoenix" width="50" style="vertical-align: middle; margin-right: 10px;" />
+<h1 align="center">
+  <img src="public/logo-phx.svg" alt="Logo Phoenix" width="20"  />
   <span style="color:#f38415;">B-WEEK Entertainment - Phoenix</span>
 </h1>
 
@@ -56,6 +56,6 @@ This project illustrates the creativity and speed of execution highlighted by th
 🎨 Designer: [**Portfolio**](https://dj-mali-boy.vercel.app/), [**GitHub**](https://github.com/HaribolGM) or [**LinkedIn**](https://www.linkedin.com/in/gauravmalii/)  
 
 ---
-<p style="text-align: center; margin-top: 35px;">
+<p align="center">
   <img src="public/logo.svg" alt="Logo Phoenix" width="480" />
 </p>

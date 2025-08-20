@@ -10,6 +10,8 @@ import Hero from "@/components/Sections/Hero";
 import About from "@/components/Sections/About";
 import Merch from "@/components/Sections/Merch";
 import NewsLetter from "@/components/Sections/NewsLetter";
+import Mobile from "@/components/Sections/Mobile";
+import { div } from "three/tsl";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -26,6 +28,13 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState(0);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
 
   const scrollToSection = (index: number) => {
     if (!lenisRef.current) return;
@@ -95,7 +104,18 @@ export default function Home() {
 
   return (
     <main className="w-full min-h-screen relative">
-      {!loaded && (
+      {isMobile && (
+        <section
+          style={{
+            backgroundImage: "linear-gradient(252.44deg, #040301 39.56%, #FF5304 100%), url('/img/noise_texture.png')",
+            backgroundBlendMode: "overlay",
+          }}
+        >
+          <Mobile />
+        </section>
+      )}
+
+      {!loaded && !isMobile && (
         <div
           ref={loaderRef}
           className={`absolute inset-0 flex items-center justify-center z-50 transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -109,7 +129,7 @@ export default function Home() {
         </div>
       )}
 
-      {loaded && (
+      {loaded && !isMobile && (
         <div ref={stackRef} className="min-h-screen">
           <div ref={navRef} className="opacity-0 fixed top-0 left-0 w-full z-50">
             <Navbar activeSection={activeSection} scrollToSection={scrollToSection} />

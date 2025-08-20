@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function Mobile() {
     return (
-        <div className="flex flex-col items-center justify-between h-screen text-white p-10">
+        <div className="flex flex-col items-center justify-between h-screen max-h-screen text-white p-9">
             <div className="flex justify-start w-full">
                 <div className="w-[60%]">
                     <Image

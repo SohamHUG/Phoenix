@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1 align="left">
   <img src="public/logo-phx.svg" alt="Logo Phoenix" width="20"  />
   <span style="color:#f38415;">B-WEEK Entertainment - Phoenix</span>
 </h1>
